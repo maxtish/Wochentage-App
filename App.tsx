@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 
 export default function App() {
   type Wochentage = {
@@ -67,7 +67,6 @@ export default function App() {
   const tagDe = Object.keys(tag)[0];
   const tagRus = tag[tagDe];
 
-  console.log(tagRus);
   const WochentageList = () => {
     const defaultColor: string = "#94BCD6";
 
@@ -93,19 +92,18 @@ export default function App() {
     return (
       <View style={styles.wrapButton}>
         {wochentageList.map((key) => (
-          <TouchableOpacity
+          <Pressable
             style={[
               styles.button,
               { backgroundColor: colorButtons[key] || defaultColor },
             ]}
             key={key}
             onPress={() => handleButtonClick(key)}
-            accessibilityLabel={key as keyof Wochentage}
           >
             <Text style={styles.textButton}>
               {key.charAt(0).toUpperCase() + key.slice(1)}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         ))}
       </View>
     );
