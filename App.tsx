@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 export default function App() {
   type Wochentage = {
@@ -22,30 +22,90 @@ export default function App() {
     samstag: "Суббота",
     sonntag: "Воскресенье",
   };
+  interface Itage {
+    [key: string]: string;
+  }
+  const [tag, setTag] = useState<Itage>({ loading: "loading" });
+  const [wochentageList, setWochentageList] = useState<string[]>([]);
 
-  const WochentageList = () => {
-    const defaultColor: string = "#841584";
+  const getRandomDay = (data: Wochentage): Itage => {
+    const keys = Object.keys(data);
+    const randomIndex = Math.floor(Math.random() * keys.length);
+    const randomDay = keys[randomIndex];
 
-    const [colorButton, setColorButton] = useState(defaultColor);
+    const randomDaydata = {
+      [randomDay]: data[randomDay as keyof Wochentage],
+    };
 
-    // Создаем массив ключей из объекта wochentage
-    const wochentageKeys = Object.keys(wochentage);
-    // Создаем копию массива и перемешиваем массив
+    return randomDaydata;
+  };
+
+  const getRandomWochentage = (data: Wochentage): string[] => {
+    const wochentageKeys = Object.keys(data);
+
+    // Создаем копию массива
     const shuffledWochentageKeys = [...wochentageKeys].sort(
       () => Math.random() - 0.5
     );
+
+    return shuffledWochentageKeys;
+  };
+
+  const resetGame = () => {
+    // Задержка в 3 секунды перед сбросом игры
+    setTimeout(() => {
+      setTag(getRandomDay(wochentage));
+      setWochentageList(getRandomWochentage(wochentage));
+    }, 2000);
+  };
+
+  useEffect(() => {
+    setTag(getRandomDay(wochentage));
+
+    setWochentageList(getRandomWochentage(wochentage));
+  }, []);
+  const tagDe = Object.keys(tag)[0];
+  const tagRus = tag[tagDe];
+
+  console.log(tagRus);
+  const WochentageList = () => {
+    const defaultColor: string = "#94BCD6";
+
+    // Создаем объект состояния для хранения цветов кнопок
+    const [colorButtons, setColorButtons] = useState<Record<string, string>>(
+      {}
+    );
+
+    const handleButtonClick = (key: string) => {
+      // Генерируем цвет для данной кнопки
+      const newColor = key === tagDe ? "#35A941" : "#CF0000";
+      // Обновляем состояние, чтобы сохранить цвет для данной кнопки
+      setColorButtons((prevState) => ({
+        ...prevState,
+        [key]: newColor,
+      }));
+
+      if (key === tagDe) {
+        resetGame(); // Сброс игры после угадывания
+      }
+    };
+
     return (
-      <View style={styles.button}>
-        {shuffledWochentageKeys.map((key) => (
-          <Button
+      <View style={styles.wrapButton}>
+        {wochentageList.map((key) => (
+          <TouchableOpacity
+            style={[
+              styles.button,
+              { backgroundColor: colorButtons[key] || defaultColor },
+            ]}
             key={key}
-            onPress={() => {
-              console.log(`${key}`);
-            }}
-            title={`${key}`}
-            color={colorButton}
+            onPress={() => handleButtonClick(key)}
             accessibilityLabel={key as keyof Wochentage}
-          ></Button>
+          >
+            <Text style={styles.textButton}>
+              {key.charAt(0).toUpperCase() + key.slice(1)}
+            </Text>
+          </TouchableOpacity>
         ))}
       </View>
     );
@@ -53,8 +113,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Дни недели</Text>
-      <Text>{wochentage.dienstag}</Text>
+      <Text style={styles.titleRus}>Дни недели</Text>
+      <Text style={styles.titleDe}>Wochentage</Text>
+      <Text style={styles.tag}>{tagRus}</Text>
       <WochentageList />
       <StatusBar style="auto" />
     </View>
@@ -63,13 +124,47 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 70,
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
   },
-  button: {
+
+  titleRus: {
+    fontSize: 15,
+  },
+  titleDe: {
+    fontSize: 30,
+    color: "#008000",
+    marginBottom: 50,
+  },
+
+  tag: {
+    fontSize: 30,
+    marginBottom: 50,
+    backgroundColor: "#737171",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 20,
+    color: "#fff",
+    alignItems: "center",
+  },
+
+  wrapButton: {
     flexDirection: "column",
     gap: 10,
+  },
+
+  button: {
+    alignItems: "center",
+    borderRadius: 20,
+    padding: 10,
+  },
+
+  textButton: {
+    fontSize: 30,
+    letterSpacing: 3,
+    fontWeight: "600",
+    color: "#361E2A",
   },
 });
