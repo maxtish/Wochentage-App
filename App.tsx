@@ -56,7 +56,7 @@ export default function App() {
     setTimeout(() => {
       setTag(getRandomDay(wochentage));
       setWochentageList(getRandomWochentage(wochentage));
-    }, 2000);
+    }, 1000);
   };
 
   useEffect(() => {

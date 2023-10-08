@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "rd",
-    "slug": "rd",
+    "name": "wochentage",
+    "slug": "wochentage",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.rdmax.wochentage"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d9b932c1-830b-474c-8a71-22a74cd04d9a"
+      }
     }
   }
 }
