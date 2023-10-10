@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable, Dimensions } from "react-native";
 
 export default function App() {
   type Wochentage = {
@@ -27,6 +26,10 @@ export default function App() {
   }
   const [tag, setTag] = useState<Itage>({ loading: "loading" });
   const [wochentageList, setWochentageList] = useState<string[]>([]);
+  const [heightScreen, setheightScreen] = useState(10);
+
+  const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
+    Dimensions.get("window");
 
   const getRandomDay = (data: Wochentage): Itage => {
     const keys = Object.keys(data);
@@ -60,6 +63,7 @@ export default function App() {
   };
 
   useEffect(() => {
+    setheightScreen(SCREEN_HEIGHT);
     setTag(getRandomDay(wochentage));
 
     setWochentageList(getRandomWochentage(wochentage));
@@ -89,6 +93,8 @@ export default function App() {
       }
     };
 
+    const fontSizeButton = heightScreen / 2 / 10;
+
     return (
       <View style={styles.wrapButton}>
         {wochentageList.map((key) => (
@@ -100,7 +106,7 @@ export default function App() {
             key={key}
             onPress={() => handleButtonClick(key)}
           >
-            <Text style={styles.textButton}>
+            <Text style={[styles.textButton, { fontSize: fontSizeButton }]}>
               {key.charAt(0).toUpperCase() + key.slice(1)}
             </Text>
           </Pressable>
@@ -108,59 +114,73 @@ export default function App() {
       </View>
     );
   };
-
+  const fontSizeTitle = heightScreen / 3 / 10;
+  const fontSizeTag = heightScreen / 2.5 / 10;
   return (
     <View style={styles.container}>
-      <Text style={styles.titleRus}>Дни недели</Text>
-      <Text style={styles.titleDe}>Wochentage</Text>
-      <Text style={styles.tag}>{tagRus}</Text>
+      <View style={styles.header}>
+        <Text style={[styles.titleRus, { fontSize: fontSizeTitle }]}>
+          Дни недели
+        </Text>
+        <Text style={[styles.titleDe, { fontSize: fontSizeTitle }]}>
+          Wochentage
+        </Text>
+        <Text style={[styles.tag, { fontSize: fontSizeTag }]}>{tagRus}</Text>
+      </View>
       <WochentageList />
-      <StatusBar style="auto" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 70,
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
   },
+  header: {
+    flex: 0.2,
+    width: "100%",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
 
   titleRus: {
-    fontSize: 15,
+    marginTop: 30,
   },
+
   titleDe: {
-    fontSize: 30,
     color: "#008000",
-    marginBottom: 50,
   },
 
   tag: {
-    fontSize: 30,
-    marginBottom: 50,
+    alignItems: "center",
     backgroundColor: "#737171",
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingHorizontal: "5%",
+    paddingVertical: "1%",
     borderRadius: 20,
     color: "#fff",
-    alignItems: "center",
   },
 
   wrapButton: {
+    flex: 0.75,
+    width: "100%",
+    paddingTop: 40,
     flexDirection: "column",
-    gap: 10,
+    justifyContent: "space-around",
+    alignItems: "center",
   },
 
   button: {
+    minWidth: "70%",
+    height: "10%",
     alignItems: "center",
     borderRadius: 20,
-    padding: 10,
+    justifyContent: "center",
+    paddingHorizontal: 20,
   },
 
   textButton: {
-    fontSize: 30,
     letterSpacing: 3,
     fontWeight: "600",
     color: "#361E2A",
