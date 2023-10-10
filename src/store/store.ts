@@ -1,12 +1,24 @@
 // store.ts
-import { createStore, combineReducers } from "redux";
-import countReducer from "./reducers/count";
 
-// Корневой редуктор, объединяющий все редукторы
+import { createStore, combineReducers } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import countReducer from "./reducers/count"; // Импортируйте редюсер
+import { Persistor } from "redux-persist/es/types";
+
+// Создайте корневой редюсер
 const rootReducer = combineReducers({
   stateCounts: countReducer,
 });
 
-const store = createStore(rootReducer);
+const persistConfig = {
+  key: "root",
+  storage: AsyncStorage,
+};
 
-export default store;
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = createStore(persistedReducer);
+const persistor: Persistor = persistStore(store);
+
+export { store, persistor };
