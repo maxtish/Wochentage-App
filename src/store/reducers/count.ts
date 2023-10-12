@@ -1,20 +1,19 @@
 // reducers/count.ts
 import { ActionTypes } from "../actions/actions";
 
-export interface IState {
-  stateCounts: IСount;
-}
-
-export interface IСount {
+export interface stateCounts {
   count: number;
 }
 
 // Начальное состояние
-const initialState: IСount = {
+const initialState: stateCounts = {
   count: 0,
 };
 
-const countReducer = (state: IСount = initialState, action: ActionTypes) => {
+const countReducer = (
+  state: stateCounts = initialState,
+  action: ActionTypes
+) => {
   switch (action.type) {
     case "INCREMENT":
       return { ...state, count: state.count + 1 };
