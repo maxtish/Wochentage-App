@@ -1,3 +1,5 @@
+import { IDataItem, IDataState } from "./src/store/reducers/data";
+
 export type TData = {
   rus: string[];
   de: string[];
@@ -33,3 +35,6 @@ Freitag - Пятница
 Samstag - Суббота
 Sonntag - Воскресенье
 */
+
+// Интерфейс для элемента массива bazaArray
+export type TBazaArrayItem = Array<[string, IDataItem]>;

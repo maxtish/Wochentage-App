@@ -1,4 +1,4 @@
-import { TData } from "../../../constants";
+import { TBazaArrayItem, TData } from "../../../constants";
 import { IDataItem } from "../reducers/data";
 
 // actions.ts
@@ -16,9 +16,30 @@ export const initData = (data: TData) => ({
 });
 
 export const delAll = () => ({
-  type: "DELL_ALL" as const,
+  type: "DEL_ALL" as const,
+});
+
+export const ratingIncrement = (id: string) => ({
+  type: "RATING_INCREMENT" as const,
+  id,
+});
+
+export const ratingDecrement = (id: string) => ({
+  type: "RATING_DECREMENT" as const,
+  id,
+});
+
+export const addQueue = (queueArr: TBazaArrayItem) => ({
+  type: "ADD_QUEUE" as const,
+  queueArr,
 });
 
 export type ActionTypes = ReturnType<
-  typeof increment | typeof decrement | typeof initData | typeof delAll
+  | typeof increment
+  | typeof decrement
+  | typeof initData
+  | typeof delAll
+  | typeof ratingIncrement
+  | typeof ratingDecrement
+  | typeof addQueue
 >;
