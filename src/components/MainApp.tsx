@@ -4,7 +4,6 @@ import { View, Text, Pressable, StyleSheet, FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   increment,
-  decrement,
   initData,
   delAll,
   ratingIncrement,
@@ -15,7 +14,7 @@ import {
 } from "../store/actions/actions"; // Путь к вашим действиям (actions)
 import { stateCounts } from "../store/reducers/count";
 import { TBazaArrayItem, TData, allData } from "../../constants";
-import { IButtonsState, IDataItem, IDataState } from "../store/reducers/data";
+import { IButtonsState, IDataState } from "../store/reducers/data";
 
 export interface IState {
   stateCounts: stateCounts;
@@ -58,7 +57,10 @@ const App: React.FC = () => {
 
   // Добавляем в очередь
   useEffect(() => {
-    if (count === Object.values(state.stateData.queue).length) {
+    if (
+      count === Object.values(state.stateData.queue).length &&
+      Object.values(state.stateData.queue).length > 0
+    ) {
       // Преобразовать объект baza в массив пар ключ-значение
       const bazaArray: TBazaArrayItem = Object.entries(state.stateData.baza);
       // Отсортировать массив по значению rating в порядке возрастания
@@ -71,8 +73,11 @@ const App: React.FC = () => {
   }, [count, state.stateData.baza]);
 
   const checkButton = (id: string) => {
-    const newColor = id === queue ? isGoodColorButton : isBadColorButton;
-    if (id === queue) {
+    const newColor =
+      state.stateData.button[id] === state.stateData.baza[queue].de
+        ? isGoodColorButton
+        : isBadColorButton;
+    if (state.stateData.button[id] === state.stateData.baza[queue].de) {
       console.log("DA");
       // УГАДАЛ
       // Обновляем цвет кнопки

@@ -18,7 +18,7 @@ export interface IButtonsState {
 }
 export interface IDataState {
   name: string;
-  baza: IBaza;
+  baza: { [key: string]: { rus: string; de: string; rating: number } };
   queue: { [key: string]: string }; //очередь для угадывания
   button: IButtonsState; //объект для кнопок
 }
