@@ -10,9 +10,10 @@ export const decrement = () => ({
   type: "DECREMENT" as const,
 });
 
-export const initData = (data: TData) => ({
+export const initData = (data: TData, name: string) => ({
   type: "INIT_DATA" as const,
   data,
+  name,
 });
 
 export const delAll = () => ({
@@ -39,6 +40,10 @@ export const updateButtons = (shuffledButtonsObj: IButtonsState) => ({
   shuffledButtonsObj,
 });
 
+export const resetCount = () => ({
+  type: "RESET_COUNT" as const,
+});
+
 export type ActionTypes = ReturnType<
   | typeof increment
   | typeof decrement
@@ -48,4 +53,5 @@ export type ActionTypes = ReturnType<
   | typeof ratingDecrement
   | typeof addQueue
   | typeof updateButtons
+  | typeof resetCount
 >;

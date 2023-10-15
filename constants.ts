@@ -26,15 +26,10 @@ export const daysOfWeek: TData = {
   ],
 };
 
-/*
-Montag - Понедельник
-Dienstag - Вторник
-Mittwoch - Среда
-Donnerstag - Четверг
-Freitag - Пятница
-Samstag - Суббота
-Sonntag - Воскресенье
-*/
+export const seasons: TData = {
+  rus: ["Весна", "Лето", "Осень", "Зима"],
+  de: ["Frühling", "Sommer", "Herbst", "Winter"],
+};
 
 // Интерфейс для элемента массива bazaArray
 export type TBazaArrayItem = Array<[string, IDataItem]>;

@@ -17,6 +17,7 @@ export interface IButtonsState {
   [key: string]: string;
 }
 export interface IDataState {
+  name: string;
   baza: IBaza;
   queue: { [key: string]: string }; //очередь для угадывания
   button: IButtonsState; //объект для кнопок
@@ -24,6 +25,7 @@ export interface IDataState {
 
 // Начальное состояние
 const initialState: IDataState = {
+  name: "",
   baza: {},
   queue: {},
   button: {},
@@ -33,6 +35,7 @@ const dataReducer = (state = initialState, action: ActionTypes) => {
     case "INIT_DATA":
       //инициализация базы -  удаляет старую и вствляет новую
       const newState: IDataState = {
+        name: action.name,
         baza: {},
         queue: {},
         button: {},
@@ -55,6 +58,7 @@ const dataReducer = (state = initialState, action: ActionTypes) => {
 
     case "DEL_ALL":
       const nullState: IDataState = {
+        name: "",
         baza: {},
         queue: {},
         button: {},

@@ -11,9 +11,10 @@ import {
   ratingDecrement,
   addQueue,
   updateButtons,
+  resetCount,
 } from "../store/actions/actions"; // Путь к вашим действиям (actions)
 import { stateCounts } from "../store/reducers/count";
-import { TBazaArrayItem, daysOfWeek } from "../../constants";
+import { TBazaArrayItem, daysOfWeek, seasons } from "../../constants";
 import { IButtonsState, IDataItem, IDataState } from "../store/reducers/data";
 
 export interface IState {
@@ -98,6 +99,11 @@ const App: React.FC = () => {
       }));
     }
   };
+
+  const closeLesson = () => {
+    dispatch(delAll());
+    dispatch(resetCount());
+  };
   return (
     <View
       style={{
@@ -107,21 +113,34 @@ const App: React.FC = () => {
         gap: 10,
       }}
     >
+      {Object.keys(state.stateData.baza).length === 0 ? (
+        <>
+          <Text>Загрузка урока</Text>
+          <Pressable
+            onPress={() => dispatch(initData(seasons, "Времена года"))}
+          >
+            <Text>Времена года</Text>
+          </Pressable>
+          <Pressable
+            onPress={() => dispatch(initData(daysOfWeek, "Дни недели"))}
+          >
+            <Text>Дни недели</Text>
+          </Pressable>
+        </>
+      ) : (
+        <Text>Урок: {state.stateData.name}</Text>
+      )}
+
       <Text>Счетчик:{count}</Text>
       <Text>
         Слово:
         {state.stateData.baza[state.stateData.queue[count]]?.rus}
       </Text>
 
-      <Pressable onPress={() => dispatch(initData(daysOfWeek))}>
-        <Text>Добавить базу</Text>
+      <Pressable onPress={() => closeLesson()}>
+        <Text>Закрыть урок</Text>
       </Pressable>
-      <Pressable onPress={() => dispatch(delAll())}>
-        <Text>Удалить всю базу</Text>
-      </Pressable>
-      <Pressable onPress={() => dispatch(decrement())}>
-        <Text>Минус</Text>
-      </Pressable>
+
       {Object.keys(state.stateData.button).map((id) => {
         return (
           <Pressable
