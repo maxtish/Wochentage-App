@@ -10,10 +10,9 @@ export const decrement = () => ({
   type: "DECREMENT" as const,
 });
 
-export const initData = (data: TData, name: string) => ({
+export const initData = (data: TData) => ({
   type: "INIT_DATA" as const,
   data,
-  name,
 });
 
 export const delAll = () => ({

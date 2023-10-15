@@ -35,7 +35,7 @@ const dataReducer = (state = initialState, action: ActionTypes) => {
     case "INIT_DATA":
       //инициализация базы -  удаляет старую и вствляет новую
       const newState: IDataState = {
-        name: action.name,
+        name: action.data.name,
         baza: {},
         queue: {},
         button: {},

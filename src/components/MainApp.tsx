@@ -1,6 +1,6 @@
 // App.tsx
 import React, { useState, useEffect } from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, FlatList } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   increment,
@@ -14,7 +14,7 @@ import {
   resetCount,
 } from "../store/actions/actions"; // Путь к вашим действиям (actions)
 import { stateCounts } from "../store/reducers/count";
-import { TBazaArrayItem, daysOfWeek, seasons } from "../../constants";
+import { TBazaArrayItem, TData, allData } from "../../constants";
 import { IButtonsState, IDataItem, IDataState } from "../store/reducers/data";
 
 export interface IState {
@@ -104,6 +104,18 @@ const App: React.FC = () => {
     dispatch(delAll());
     dispatch(resetCount());
   };
+  // уроки
+  const renderItemLesson = ({ item }: { item: TData }) => (
+    <Pressable
+      style={styles.lessonButton}
+      onPress={() => dispatch(initData(item))}
+    >
+      <Text>{item.name}</Text>
+    </Pressable>
+  );
+  // отступы между кнопками
+  const renderSeparator = () => <View style={styles.separator} />;
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -119,21 +131,15 @@ const App: React.FC = () => {
         <Text style={styles.headerLesson}>Урок: {state.stateData.name}</Text>
       </View>
       {Object.keys(state.stateData.baza).length === 0 ? (
-        <>
-          <Text>Загрузка урока: </Text>
-          <Pressable
-            style={styles.lessonButton}
-            onPress={() => dispatch(initData(seasons, "Времена года"))}
-          >
-            <Text>Времена года</Text>
-          </Pressable>
-          <Pressable
-            style={styles.lessonButton}
-            onPress={() => dispatch(initData(daysOfWeek, "Дни недели"))}
-          >
-            <Text>Дни недели</Text>
-          </Pressable>
-        </>
+        <View>
+          <Text style={styles.textLoadLesson}>Загрузка урока: </Text>
+          <FlatList
+            data={allData}
+            renderItem={renderItemLesson}
+            keyExtractor={(item) => item.name}
+            ItemSeparatorComponent={renderSeparator}
+          />
+        </View>
       ) : (
         <View style={styles.wrapperMain}>
           <Text style={styles.itemQueue}>
@@ -194,7 +200,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     borderRadius: 20,
   },
-
+  textLoadLesson: {
+    marginBottom: 20,
+  },
+  separator: {
+    height: 10,
+  },
   lessonButton: {
     padding: 5,
     backgroundColor: "#B0C4DE",
