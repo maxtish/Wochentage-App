@@ -28,12 +28,14 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
   type TButtonEntry = [string, string];
   const { count } = useSelector((state: IState) => state.stateCounts);
-  const state = useSelector((state: IState) => state);
-  console.log(state);
+  const stateBaza = useSelector((state: IState) => state.stateData.baza);
+  const stateButton = useSelector((state: IState) => state.stateData.button);
+  const stateName = useSelector((state: IState) => state.stateData.name);
+  const stateQueue = useSelector((state: IState) => state.stateData.queue);
 
   // Создаем объект состояния для хранения цветов кнопок
   const [colorButtons, setColorButtons] = useState<Record<string, string>>({});
-  const queue = state.stateData.queue[count];
+  const queue = stateQueue[count];
 
   // Функция перемешивания кнопок
   const shuffleButtons = (buttons: IButtonsState): IButtonsState => {
@@ -58,27 +60,27 @@ const App: React.FC = () => {
   // Добавляем в очередь
   useEffect(() => {
     if (
-      count === Object.values(state.stateData.queue).length &&
-      Object.values(state.stateData.queue).length > 0
+      count === Object.values(stateQueue).length &&
+      Object.values(stateQueue).length > 0
     ) {
       // Преобразовать объект baza в массив пар ключ-значение
-      const bazaArray: TBazaArrayItem = Object.entries(state.stateData.baza);
+      const bazaArray: TBazaArrayItem = Object.entries(stateBaza);
       // Отсортировать массив по значению rating в порядке возрастания
       bazaArray.sort((a, b) => a[1].rating - b[1].rating);
       bazaArray[bazaArray.length - 1] = bazaArray[0];
-      console.log(bazaArray);
+
       // bazaArray = [['id',{IDataItem}],['id',{IDataItem}] ....]
       dispatch(addQueue(bazaArray));
     }
-  }, [count, state.stateData.baza]);
+  }, [count, stateBaza]);
 
   const checkButton = (id: string) => {
     const newColor =
-      state.stateData.button[id] === state.stateData.baza[queue].de
+      stateButton[id] === stateBaza[queue].de
         ? isGoodColorButton
         : isBadColorButton;
-    if (state.stateData.button[id] === state.stateData.baza[queue].de) {
-      console.log("DA");
+    if (stateButton[id] === stateBaza[queue].de) {
+      console.log("YES");
       // УГАДАЛ
       // Обновляем цвет кнопки
       setColorButtons((prevState) => ({
@@ -91,11 +93,11 @@ const App: React.FC = () => {
         dispatch(ratingIncrement(queue));
         setColorButtons({});
         dispatch(increment());
-        dispatch(updateButtons(shuffleButtons(state.stateData.button)));
+        dispatch(updateButtons(shuffleButtons(stateButton)));
       }, 2000);
     } else {
       // НЕ УГАДАЛ
-      console.log("net");
+      console.log("NO");
       dispatch(ratingDecrement(queue));
       // Обновляем цвет кнопки
       setColorButtons((prevState) => ({
@@ -127,15 +129,15 @@ const App: React.FC = () => {
         <View style={styles.headerClose}>
           <Text>Счетчик:{count}</Text>
 
-          {Object.keys(state.stateData.baza).length > 0 && (
+          {Object.keys(stateBaza).length > 0 && (
             <Pressable onPress={() => closeLesson()} style={styles.closeButton}>
               <Text style={styles.closeText}>Закрыть урок</Text>
             </Pressable>
           )}
         </View>
-        <Text style={styles.headerLesson}>Урок: {state.stateData.name}</Text>
+        <Text style={styles.headerLesson}>Урок: {stateName}</Text>
       </View>
-      {Object.keys(state.stateData.baza).length === 0 ? (
+      {Object.keys(stateBaza).length === 0 ? (
         <View>
           <Text style={styles.textLoadLesson}>Загрузка урока: </Text>
           <FlatList
@@ -148,10 +150,10 @@ const App: React.FC = () => {
       ) : (
         <View style={styles.wrapperMain}>
           <Text style={styles.itemQueue}>
-            {state.stateData.baza[state.stateData.queue[count]]?.rus}
+            {stateBaza[stateQueue[count]]?.rus}
           </Text>
           <View style={styles.wrapperBottons}>
-            {Object.keys(state.stateData.button).map((id) => {
+            {Object.keys(stateButton).map((id) => {
               return (
                 <Pressable
                   key={id}
@@ -163,9 +165,7 @@ const App: React.FC = () => {
                     { backgroundColor: colorButtons[id] || defaultColorButton },
                   ]}
                 >
-                  <Text style={styles.buttonText}>
-                    {state.stateData.button[id]}
-                  </Text>
+                  <Text style={styles.buttonText}>{stateButton[id]}</Text>
                 </Pressable>
               );
             })}
