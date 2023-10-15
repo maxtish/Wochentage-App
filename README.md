@@ -51,4 +51,4 @@
    eas build -p android
    Процесс сборки APK будет запущен. Следуйте инструкциям в консоли для настройки сборки.
 
-- Вот ссылка на мой [Wochentage.apk](https://expo.dev/accounts/rd-max/projects/wochentage/builds/36bd7f2c-8a48-414d-a379-cb502ac6f017)
+- Вот ссылка на мой [Wochentage.apk](https://expo.dev/accounts/rd-max/projects/wochentage/builds/67c89887-a057-457b-800b-9ce6048fa4c6)
