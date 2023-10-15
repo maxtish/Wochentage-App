@@ -1,6 +1,6 @@
 // App.tsx
 import React, { useState, useEffect } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   increment,
@@ -23,7 +23,7 @@ export interface IState {
 }
 
 const App: React.FC = () => {
-  const defaultColorButton = "#8FBC8F";
+  const defaultColorButton = "#B0C4DE";
   const isGoodColorButton = "#008000";
   const isBadColorButton = "#B22222";
   const dispatch = useDispatch();
@@ -105,59 +105,128 @@ const App: React.FC = () => {
     dispatch(resetCount());
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 10,
-      }}
-    >
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.headerClose}>
+          <Text>Счетчик:{count}</Text>
+
+          {Object.keys(state.stateData.baza).length > 0 && (
+            <Pressable onPress={() => closeLesson()} style={styles.closeButton}>
+              <Text style={styles.closeText}>Закрыть урок</Text>
+            </Pressable>
+          )}
+        </View>
+        <Text style={styles.headerLesson}>Урок: {state.stateData.name}</Text>
+      </View>
       {Object.keys(state.stateData.baza).length === 0 ? (
         <>
-          <Text>Загрузка урока</Text>
+          <Text>Загрузка урока: </Text>
           <Pressable
+            style={styles.lessonButton}
             onPress={() => dispatch(initData(seasons, "Времена года"))}
           >
             <Text>Времена года</Text>
           </Pressable>
           <Pressable
+            style={styles.lessonButton}
             onPress={() => dispatch(initData(daysOfWeek, "Дни недели"))}
           >
             <Text>Дни недели</Text>
           </Pressable>
         </>
       ) : (
-        <Text>Урок: {state.stateData.name}</Text>
+        <View style={styles.wrapperMain}>
+          <Text style={styles.itemQueue}>
+            {state.stateData.baza[state.stateData.queue[count]]?.rus}
+          </Text>
+          <View style={styles.wrapperBottons}>
+            {Object.keys(state.stateData.button).map((id) => {
+              return (
+                <Pressable
+                  key={id}
+                  onPress={() => {
+                    checkButton(id);
+                  }}
+                  style={[
+                    styles.buttons,
+                    { backgroundColor: colorButtons[id] || defaultColorButton },
+                  ]}
+                >
+                  <Text style={styles.buttonText}>
+                    {state.stateData.button[id]}
+                  </Text>
+                </Pressable>
+              );
+            })}
+          </View>
+        </View>
       )}
-
-      <Text>Счетчик:{count}</Text>
-      <Text>
-        Слово:
-        {state.stateData.baza[state.stateData.queue[count]]?.rus}
-      </Text>
-
-      <Pressable onPress={() => closeLesson()}>
-        <Text>Закрыть урок</Text>
-      </Pressable>
-
-      {Object.keys(state.stateData.button).map((id) => {
-        return (
-          <Pressable
-            key={id}
-            onPress={() => {
-              checkButton(id);
-            }}
-            style={[
-              { backgroundColor: colorButtons[id] || defaultColorButton },
-            ]}
-          >
-            <Text>{state.stateData.button[id]}</Text>
-          </Pressable>
-        );
-      })}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 5,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: 10,
+  },
+  header: {
+    width: "100%",
+    flexDirection: "column",
+  },
+  headerClose: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  headerLesson: {
+    textAlign: "center",
+  },
+  closeButton: {
+    backgroundColor: "#FF6347",
+    borderRadius: 5,
+  },
+  closeText: {
+    paddingHorizontal: 5,
+    borderRadius: 20,
+  },
+
+  lessonButton: {
+    padding: 5,
+    backgroundColor: "#B0C4DE",
+    borderRadius: 5,
+  },
+  wrapperMain: {
+    margin: "auto", /// вопрос и кнопки центр по высоте
+    paddingBottom: 20,
+  },
+  itemQueue: {
+    marginBottom: 40,
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "600",
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: "#AFEEEE",
+    borderWidth: 2,
+    borderColor: "#4682B4",
+  },
+  buttons: {
+    padding: 5,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: "600",
+  },
+  wrapperBottons: {
+    gap: 10,
+  },
+});
 
 export default App;
