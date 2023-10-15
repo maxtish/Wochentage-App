@@ -1,5 +1,5 @@
 import { TBazaArrayItem, TData } from "../../../constants";
-import { IDataItem } from "../reducers/data";
+import { IButtonsState, IDataItem } from "../reducers/data";
 
 // actions.ts
 export const increment = () => ({
@@ -34,6 +34,11 @@ export const addQueue = (queueArr: TBazaArrayItem) => ({
   queueArr,
 });
 
+export const updateButtons = (shuffledButtonsObj: IButtonsState) => ({
+  type: "SHUFFLED_BUTTONS" as const,
+  shuffledButtonsObj,
+});
+
 export type ActionTypes = ReturnType<
   | typeof increment
   | typeof decrement
@@ -42,4 +47,5 @@ export type ActionTypes = ReturnType<
   | typeof ratingIncrement
   | typeof ratingDecrement
   | typeof addQueue
+  | typeof updateButtons
 >;

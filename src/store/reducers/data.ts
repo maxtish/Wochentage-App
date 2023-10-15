@@ -1,4 +1,5 @@
 // reducers/data.ts
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActionTypes } from "../actions/actions";
 import { v4 as uuidv4 } from "uuid";
 
@@ -12,10 +13,13 @@ interface IBaza {
   [key: string]: IDataItem;
 }
 
+export interface IButtonsState {
+  [key: string]: string;
+}
 export interface IDataState {
   baza: IBaza;
   queue: { [key: string]: string }; //очередь для угадывания
-  button: { [key: string]: string }; //объект для кнопок
+  button: IButtonsState; //объект для кнопок
 }
 
 // Начальное состояние
@@ -55,6 +59,7 @@ const dataReducer = (state = initialState, action: ActionTypes) => {
         queue: {},
         button: {},
       };
+      AsyncStorage.clear(); //очищает кэш
       return nullState;
 
     case "RATING_INCREMENT":
@@ -88,6 +93,9 @@ const dataReducer = (state = initialState, action: ActionTypes) => {
         i++;
       }
       return oldState;
+
+    case "SHUFFLED_BUTTONS":
+      return { ...state, button: action.shuffledButtonsObj };
 
     default:
       return state;

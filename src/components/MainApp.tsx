@@ -10,10 +10,11 @@ import {
   ratingIncrement,
   ratingDecrement,
   addQueue,
+  updateButtons,
 } from "../store/actions/actions"; // Путь к вашим действиям (actions)
 import { stateCounts } from "../store/reducers/count";
 import { TBazaArrayItem, daysOfWeek } from "../../constants";
-import { IDataItem, IDataState } from "../store/reducers/data";
+import { IButtonsState, IDataItem, IDataState } from "../store/reducers/data";
 
 export interface IState {
   stateCounts: stateCounts;
@@ -25,16 +26,34 @@ const App: React.FC = () => {
   const isGoodColorButton = "#008000";
   const isBadColorButton = "#B22222";
   const dispatch = useDispatch();
+  type TButtonEntry = [string, string];
   const { count } = useSelector((state: IState) => state.stateCounts);
   const state = useSelector((state: IState) => state);
   console.log(state);
+
   // Создаем объект состояния для хранения цветов кнопок
   const [colorButtons, setColorButtons] = useState<Record<string, string>>({});
   const queue = state.stateData.queue[count];
 
-  useEffect(() => {
-    dispatch(delAll());
-  }, []);
+  // Функция перемешивания кнопок
+  const shuffleButtons = (buttons: IButtonsState): IButtonsState => {
+    const entries: TButtonEntry[] = Object.entries(buttons);
+    const shuffledEntries: TButtonEntry[] = shuffleArray(entries); // Перемешиваем массив пар ключ-значение
+    const shuffledButtons: IButtonsState = {};
+    shuffledEntries.forEach(([key, value]) => {
+      shuffledButtons[key] = value; // Создаем новый объект кнопок с перемешанными ключами и значениями
+    });
+    return shuffledButtons;
+  };
+
+  // Функция перемешивания массива
+  const shuffleArray = (arr: TButtonEntry[]): TButtonEntry[] => {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  };
 
   // Добавляем в очередь
   useEffect(() => {
@@ -66,6 +85,7 @@ const App: React.FC = () => {
         dispatch(ratingIncrement(queue));
         setColorButtons({});
         dispatch(increment());
+        dispatch(updateButtons(shuffleButtons(state.stateData.button)));
       }, 2000);
     } else {
       // НЕ УГАДАЛ
