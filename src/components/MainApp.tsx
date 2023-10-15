@@ -1,6 +1,13 @@
 // App.tsx
 import React, { useState, useEffect } from "react";
-import { View, Text, Pressable, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  FlatList,
+  ScrollView,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   increment,
@@ -138,7 +145,7 @@ const App: React.FC = () => {
         <Text style={styles.headerLesson}>Урок: {stateName}</Text>
       </View>
       {Object.keys(stateBaza).length === 0 ? (
-        <View>
+        <ScrollView>
           <Text style={styles.textLoadLesson}>Загрузка урока: </Text>
           <FlatList
             data={allData}
@@ -146,7 +153,7 @@ const App: React.FC = () => {
             keyExtractor={(item) => item.name}
             ItemSeparatorComponent={renderSeparator}
           />
-        </View>
+        </ScrollView>
       ) : (
         <View style={styles.wrapperMain}>
           <Text style={styles.itemQueue}>
