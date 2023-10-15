@@ -1,6 +1,7 @@
 // reducers/data.ts
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActionTypes } from "../actions/actions";
+import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
 export interface IDataItem {

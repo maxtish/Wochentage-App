@@ -178,7 +178,8 @@ const App: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
+    paddingTop: 50,
+    paddingHorizontal: 10,
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
@@ -217,7 +218,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   wrapperMain: {
-    margin: "auto", /// вопрос и кнопки центр по высоте
+    flex: 1,
+    justifyContent: "space-around",
     paddingBottom: 20,
   },
   itemQueue: {
