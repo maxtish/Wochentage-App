@@ -101,7 +101,7 @@ const App: React.FC = () => {
         setColorButtons({});
         dispatch(increment());
         dispatch(updateButtons(shuffleButtons(stateButton)));
-      }, 2000);
+      }, 700);
     } else {
       // НЕ УГАДАЛ
       console.log("NO");
@@ -119,16 +119,27 @@ const App: React.FC = () => {
     dispatch(resetCount());
   };
   // уроки
-  const renderItemLesson = ({ item }: { item: TData }) => (
-    <Pressable
-      style={styles.lessonButton}
+
+  interface ILessonButtonProps {
+    onPress: () => void;
+    text: string;
+  }
+
+  const LessonButton: React.FC<ILessonButtonProps> = ({ onPress, text }) => {
+    return (
+      <Pressable style={styles.lessonButton} onPress={onPress}>
+        <Text>{text}</Text>
+      </Pressable>
+    );
+  };
+
+  const lessonButtons = allData.map((item: TData, index: number) => (
+    <LessonButton
+      key={index}
+      text={item.name}
       onPress={() => dispatch(initData(item))}
-    >
-      <Text>{item.name}</Text>
-    </Pressable>
-  );
-  // отступы между кнопками
-  const renderSeparator = () => <View style={styles.separator} />;
+    />
+  ));
 
   return (
     <View style={styles.container}>
@@ -147,12 +158,7 @@ const App: React.FC = () => {
       {Object.keys(stateBaza).length === 0 ? (
         <ScrollView>
           <Text style={styles.textLoadLesson}>Загрузка урока: </Text>
-          <FlatList
-            data={allData}
-            renderItem={renderItemLesson}
-            keyExtractor={(item) => item.name}
-            ItemSeparatorComponent={renderSeparator}
-          />
+          <View style={styles.gapLesson}>{lessonButtons}</View>
         </ScrollView>
       ) : (
         <View style={styles.wrapperMain}>
@@ -204,6 +210,8 @@ const styles = StyleSheet.create({
 
   headerLesson: {
     textAlign: "center",
+    fontSize: 20,
+    fontWeight: "600",
   },
   closeButton: {
     backgroundColor: "#FF6347",
@@ -216,8 +224,8 @@ const styles = StyleSheet.create({
   textLoadLesson: {
     marginBottom: 20,
   },
-  separator: {
-    height: 10,
+  gapLesson: {
+    gap: 20,
   },
   lessonButton: {
     padding: 5,
