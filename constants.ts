@@ -53,6 +53,36 @@ export const allData: TData[] = [
     rus: ["Ich ", "Du ", "Er/Sie/Es", "Wir ", "Ihr ", "Sie "],
     de: ["kann ", "kannst ", "kann ", "können ", "könnt ", "können "],
   },
+  {
+    name: "Sollen - Обязан",
+    rus: ["Ich ", "Du ", "Er/Sie/Es", "Wir ", "Ihr ", "Sie "],
+    de: ["soll ", "sollst ", "soll ", "sollen ", "sollt ", "sollen "],
+  },
+  {
+    name: "Müssen - Быть должным",
+    rus: ["Ich ", "Du ", "Er/Sie/Es", "Wir ", "Ihr ", "Sie "],
+    de: ["muss ", "musst ", "muss ", "müssen ", "müsst ", "müssen "],
+  },
+  {
+    name: "Möchten - Хотеть(вежл.)",
+    rus: ["Ich ", "Du ", "Er/Sie/Es", "Wir ", "Ihr ", "Sie "],
+    de: ["möchte ", "möchtest ", "möchte ", "möchten ", "möchtet ", "möchten "],
+  },
+  {
+    name: "Wollen - Хотеть",
+    rus: ["Ich ", "Du ", "Er/Sie/Es", "Wir ", "Ihr ", "Sie "],
+    de: ["will ", "willst ", "will ", "wollen ", "wollt ", "wollen "],
+  },
+  {
+    name: "Mögen - Нравиться",
+    rus: ["Ich ", "Du ", "Er/Sie/Es", "Wir ", "Ihr ", "Sie "],
+    de: ["mag ", "magst ", "mag ", "mögen ", "mögt ", "mögen "],
+  },
+  {
+    name: "Wissen - Знать/Помнить",
+    rus: ["Ich ", "Du ", "Er/Sie/Es", "Wir ", "Ihr ", "Sie "],
+    de: ["weiß ", "weißt ", "weiß ", "wissen ", "wisst ", "wissen "],
+  },
 ];
 
 // Интерфейс для элемента массива bazaArray
