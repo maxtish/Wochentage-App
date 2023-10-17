@@ -18,7 +18,7 @@ import {
   addQueue,
   updateButtons,
   resetCount,
-} from "../store/actions/actions"; // Путь к вашим действиям (actions)
+} from "../store/actions/actions";
 import { stateCounts } from "../store/reducers/count";
 import { TBazaArrayItem, TData, allData } from "../../constants";
 import { IButtonsState, IDataState } from "../store/reducers/data";
@@ -28,7 +28,7 @@ export interface IState {
   stateData: IDataState;
 }
 
-const App: React.FC = () => {
+export const Lesson: React.FC = () => {
   const defaultColorButton = "#B0C4DE";
   const isGoodColorButton = "#008000";
   const isBadColorButton = "#B22222";
@@ -261,5 +261,3 @@ const styles = StyleSheet.create({
     gap: 10,
   },
 });
-
-export default App;
