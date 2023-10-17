@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     borderColor: "#BDB76B",
     borderWidth: 1,
     flexWrap: "wrap",
+    alignItems: "center",
   },
   ButtonItemsDe: {
     opacity: 0,
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
   },
   itemsDe: {
     fontWeight: "600",
-    fontSize: 20,
+    fontSize: 25,
   },
   itemsRus: {
     fontSize: 20,
