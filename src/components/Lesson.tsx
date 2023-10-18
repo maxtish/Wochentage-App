@@ -22,6 +22,7 @@ import {
 import { stateCounts } from "../store/reducers/count";
 import { TBazaArrayItem, TData, allData } from "../../constants";
 import { IButtonsState, IDataState } from "../store/reducers/data";
+import { useNavigation } from "@react-navigation/native";
 
 export interface IState {
   stateCounts: stateCounts;
@@ -39,6 +40,11 @@ export const Lesson: React.FC = () => {
   const stateButton = useSelector((state: IState) => state.stateData.button);
   const stateName = useSelector((state: IState) => state.stateData.name);
   const stateQueue = useSelector((state: IState) => state.stateData.queue);
+
+  const navigation = useNavigation(); // Инициализируем навигацию
+  const goBack = () => {
+    navigation.goBack(); // Функция для возврата на предыдущий экран
+  };
 
   // Создаем объект состояния для хранения цветов кнопок
   const [colorButtons, setColorButtons] = useState<Record<string, string>>({});
@@ -147,9 +153,13 @@ export const Lesson: React.FC = () => {
         <View style={styles.headerClose}>
           <Text>Счетчик:{count}</Text>
 
-          {Object.keys(stateBaza).length > 0 && (
+          {Object.keys(stateBaza).length > 0 ? (
             <Pressable onPress={() => closeLesson()} style={styles.closeButton}>
               <Text style={styles.closeText}>Закрыть урок</Text>
+            </Pressable>
+          ) : (
+            <Pressable onPress={() => goBack()} style={styles.closeButton}>
+              <Text style={styles.closeText}>Назад</Text>
             </Pressable>
           )}
         </View>
@@ -206,6 +216,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingHorizontal: 20,
   },
 
   headerLesson: {

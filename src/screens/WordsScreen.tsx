@@ -18,6 +18,11 @@ interface ILessonScreen {
 }
 
 const WordsScreen: React.FC<ILessonScreen> = ({ navigation }) => {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Wörter - Слова",
+    });
+  }, [navigation]);
   return <Words />;
 };
 
