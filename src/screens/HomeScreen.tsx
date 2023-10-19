@@ -1,36 +1,25 @@
 import React from "react";
-import { View, Text, Pressable, StyleSheet } from "react-native";
-import { RouteProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../routes/AppNavigator";
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import { Link, useNavigate } from "react-router-native";
 
-type HomeScreenRouteProp = RouteProp<RootStackParamList, "Home">;
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
+const HomeScreen: React.ComponentType = () => {
+  const navigate = useNavigate();
 
-interface HomeProps {
-  route: HomeScreenRouteProp;
-  navigation: HomeScreenNavigationProp;
-}
+  const ToLesson = () => {
+    navigate("/lesson"); // Переход на страницу "lesson"
+  };
 
-const HomeScreen: React.FC<HomeProps> = ({ navigation }) => {
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false, // Убрать стандартный заголовок
-    });
-  }, [navigation]);
+  const ToWords = () => {
+    navigate("/words"); // Переход на страницу "words"
+  };
+
   return (
     <View style={styles.container}>
       <Text>Это главный экран</Text>
-      <Pressable
-        style={styles.buttonsNavi}
-        onPress={() => navigation.navigate("Lesson")}
-      >
+      <Pressable style={styles.buttonsNavi} onPress={ToLesson}>
         <Text style={styles.buttonsText}>Уроки</Text>
       </Pressable>
-      <Pressable
-        style={styles.buttonsNavi}
-        onPress={() => navigation.navigate("Words")}
-      >
+      <Pressable style={styles.buttonsNavi} onPress={ToWords}>
         <Text style={styles.buttonsText}>Слова</Text>
       </Pressable>
     </View>

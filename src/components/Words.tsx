@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet, FlatList } from "react-native";
 import { wordsData, roomItems, IWord } from "../../constants"; // Подключение ваших массивов
+import { useNavigate } from "react-router-native";
+import { ButtonGoBack } from "./ButtonGoBack";
 
 export const Words: React.FC = () => {
   const [visibleItemId, setVisibleItemId] = useState<string | null>(null);
@@ -14,7 +16,10 @@ export const Words: React.FC = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
+      <View style={styles.goBack}>
+        <ButtonGoBack />
+      </View>
       <View style={styles.buttonContainer}>
         <Pressable
           style={[
@@ -65,6 +70,10 @@ export const Words: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 50,
+  },
   row: {
     paddingVertical: 5,
     backgroundColor: "#FFE4B5",
@@ -106,5 +115,11 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: "bold",
+  },
+  goBack: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    paddingHorizontal: 20,
   },
 });

@@ -22,7 +22,8 @@ import {
 import { stateCounts } from "../store/reducers/count";
 import { TBazaArrayItem, TData, allData } from "../../constants";
 import { IButtonsState, IDataState } from "../store/reducers/data";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigate } from "react-router-native";
+import { ButtonGoBack } from "./ButtonGoBack";
 
 export interface IState {
   stateCounts: stateCounts;
@@ -41,9 +42,10 @@ export const Lesson: React.FC = () => {
   const stateName = useSelector((state: IState) => state.stateData.name);
   const stateQueue = useSelector((state: IState) => state.stateData.queue);
 
-  const navigation = useNavigation(); // Инициализируем навигацию
+  const navigate = useNavigate();
+
   const goBack = () => {
-    navigation.goBack(); // Функция для возврата на предыдущий экран
+    navigate(-1); // Переход на предыдущую страницу
   };
 
   // Создаем объект состояния для хранения цветов кнопок
@@ -158,9 +160,7 @@ export const Lesson: React.FC = () => {
               <Text style={styles.closeText}>Закрыть урок</Text>
             </Pressable>
           ) : (
-            <Pressable onPress={() => goBack()} style={styles.closeButton}>
-              <Text style={styles.closeText}>Назад</Text>
-            </Pressable>
+            <ButtonGoBack />
           )}
         </View>
         <Text style={styles.headerLesson}>Урок: {stateName}</Text>
@@ -224,14 +224,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
   },
-  closeButton: {
-    backgroundColor: "#FF6347",
-    borderRadius: 5,
-  },
-  closeText: {
-    paddingHorizontal: 5,
-    borderRadius: 20,
-  },
+
   textLoadLesson: {
     marginBottom: 20,
   },
@@ -270,5 +263,13 @@ const styles = StyleSheet.create({
   },
   wrapperBottons: {
     gap: 10,
+  },
+  closeButton: {
+    backgroundColor: "#FF6347",
+    borderRadius: 5,
+  },
+  closeText: {
+    paddingHorizontal: 5,
+    borderRadius: 20,
   },
 });

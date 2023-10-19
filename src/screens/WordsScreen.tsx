@@ -1,28 +1,8 @@
 import React from "react";
-
-import { RouteProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-
-import { RootStackParamList } from "../routes/AppNavigator";
 import { Words } from "../components/Words";
+import { Text } from "react-native";
 
-type DetailsScreenRouteProp = RouteProp<RootStackParamList, "Words">;
-type DetailsScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "Words"
->;
-
-interface ILessonScreen {
-  route: DetailsScreenRouteProp;
-  navigation: DetailsScreenNavigationProp;
-}
-
-const WordsScreen: React.FC<ILessonScreen> = ({ navigation }) => {
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: "Wörter - Слова",
-    });
-  }, [navigation]);
+const WordsScreen: React.ComponentType = () => {
   return <Words />;
 };
 
