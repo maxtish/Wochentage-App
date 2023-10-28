@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, StyleSheet, FlatList } from "react-native";
-import { wordsData, roomItems, IWord } from "../../constants"; // Подключение ваших массивов
+import { wordsData, roomItems, IWord, lesson7 } from "../../constants"; // Подключение ваших массивов
 import { useNavigate } from "react-router-native";
 import { ButtonGoBack } from "./ButtonGoBack";
 
@@ -38,6 +38,15 @@ export const Words: React.FC = () => {
           onPress={() => handleArrayChange(roomItems, "im Zimmer")}
         >
           <Text style={styles.buttonText}>im Zimmer</Text>
+        </Pressable>
+        <Pressable
+          style={[
+            styles.button,
+            activeButton === "Lektion 7" && styles.activeButton,
+          ]}
+          onPress={() => handleArrayChange(lesson7, "Lektion 7")}
+        >
+          <Text style={styles.buttonText}>Lektion 7</Text>
         </Pressable>
       </View>
 

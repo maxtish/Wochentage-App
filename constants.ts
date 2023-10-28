@@ -5,6 +5,10 @@ export type TData = {
   rus: string[];
   de: string[];
 };
+export const pexelsApiKey: string =
+  "Cfy48ri1jRrrQAGWNRMWersVfcLU7hLXJtRf605DQyHottmOu0O2bd0h";
+export const apiKey: string = "AIzaSyAJOmWKykd5DBbB_i0QD44ugQr4Z1NeKfA";
+export const customSearchId: string = "d30090524e2f74072";
 
 export const allData: TData[] = [
   {
@@ -49,6 +53,30 @@ export const allData: TData[] = [
     de: ["bin", "bist", "ist", "sind", "seid", "sind"],
   },
   {
+    name: "6: Модальные глаголы",
+    rus: [
+      "мочь, иметь разрешение",
+      "мочь, уметь",
+      "быть обязанным",
+      "быть должным",
+      "хотеть, вежливая форма",
+      "хотеть",
+      "нравиться",
+      "знать, помнить",
+    ],
+    de: [
+      "Dürfen",
+      "Können",
+      "Sollen",
+      "Müssen",
+      "Möchten",
+      "Wollen",
+      "Mögen",
+      "Wissen",
+    ],
+  },
+
+  {
     name: "Dürfen - (мочь, иметь разрешение)",
     rus: ["Ich", "Du", "Er/Sie/Es", "Wir", "Ihr", "Sie"],
     de: ["darf", "darfst", "darf", "dürfen", "dürft", "dürfen"],
@@ -87,6 +115,31 @@ export const allData: TData[] = [
     name: "Wissen - (знать, помнить)",
     rus: ["Ich", "Du", "Er/Sie/Es", "Wir", "Ihr", "Sie"],
     de: ["weiß", "weißt", "weiß", "wissen", "wisst", "wissen"],
+  },
+  {
+    name: "7: Притяжательные местоимения",
+    rus: [
+      "Ich",
+      "Du",
+      "Er",
+      "sie(она)",
+      "Es",
+      "Wir",
+      "Ihr",
+      "sie(они)",
+      "Sie(Вы)",
+    ],
+    de: [
+      "mein (мой)",
+      "dein (твой)",
+      "sein (его)",
+      "ihr (ее)",
+      "sein (его)",
+      "unser (наш)",
+      "euer (ваш)",
+      "ihr (их)",
+      "Ihr (Ваш)",
+    ],
   },
 ];
 
@@ -345,4 +398,114 @@ export const roomItems: IWord[] = [
   { rus: "крючок", de: "Der Haken" },
   { rus: "зеркало", de: "Der Spiegel" },
   { rus: "вешалка", de: "Der Kleiderbügel" },
+];
+
+export const lesson7: IWord[] = [
+  { rus: "пиджак", de: "Der Anzug" },
+  { rus: "свитер", de: "Der Pullover" },
+  { rus: "шляпа", de: "Der Hut" },
+  { rus: "юбка", de: "Der Rock" },
+  { rus: "пальто", de: "Der Mantel" },
+  { rus: "шарф", de: "Der Schal" },
+  { rus: "рубашка", de: "Das Hemd" },
+  { rus: "платье", de: "Das Kleid" },
+  { rus: "футболка", de: "Das T-shirt (англ)" },
+  { rus: "блузка", de: "Die Bluse" },
+  { rus: "брюки", de: "Die Hose" },
+  { rus: "куртка", de: "Die Jacke" },
+  { rus: "одежда", de: "Die Kleidung" },
+  { rus: "шапка", de: "Die Mütze" },
+  { rus: "колготки", de: "Die Strumpfhose" },
+  { rus: "джинсы", de: "Die Jeans" },
+  { rus: "туфли", de: "Die Schuhe" },
+  { rus: "перчатки", de: "Die Handschuhe" },
+  { rus: "носки", de: "Die Socken" },
+  { rus: "Красный", de: "Rot" },
+  { rus: "Зеленый", de: "Grün" },
+  { rus: "Синий", de: "Blau" },
+  { rus: "Желтый", de: "Gelb" },
+  { rus: "Розовый", de: "Rosa" },
+  { rus: "Оранжевый", de: "Orange" },
+  { rus: "Черный", de: "Schwarz" },
+  { rus: "Белый", de: "Weiß" },
+  { rus: "Коричневый", de: "Braun" },
+  { rus: "Серый", de: "Grau" },
+  { rus: "Это мой костюм", de: "Das ist mein Anzug" },
+  { rus: "Это твой свитер", de: "Das ist dein Pullover" },
+  { rus: "Это его шляпа", de: "Das ist sein Hut" },
+  { rus: "Это ее юбка", de: "Das ist ihr Rock" },
+  { rus: "Это наше пальто", de: "Das ist unser Mantel" },
+  { rus: "Это ваш шарф", de: "Das ist euer Schal" },
+  { rus: "Это их рубашка", de: "Das ist ihr Hemd" },
+  { rus: "Это мое платье", de: "Das ist mein Kleid" },
+  { rus: "Это твоя футболка", de: "Das ist dein T-Shirt" },
+  { rus: "Это ее блузка", de: "Das ist ihre Bluse" },
+  { rus: "Это его штаны", de: "Das sind seine Hosen" },
+  { rus: "Это наша куртка", de: "Das ist unsere Jacke" },
+  { rus: "Это ваша одежда", de: "Das ist eure Kleidung" },
+  { rus: "Это их шапка", de: "Das ist ihr Hut" },
+  { rus: "Это ее колготки", de: "Das sind ihre Strumpfhosen" },
+  { rus: "Это мои джинсы (Pl)", de: "Das sind meine Jeans" },
+  { rus: "Это мои ботинки (Pl)", de: "Das sind meine Schuhe" },
+  { rus: "Это твои носки (Pl)", de: "Das sind deine Socken" },
+  { rus: "Мои носки старые", de: "Meine Socken sind alt" },
+  { rus: "Наша шапка красивая", de: "Unsere Mütze ist schön" },
+  { rus: "Ее колготки дешевые", de: "Ihre Strumpfhosen sind billig" },
+  { rus: "Твои ботинки новые (Pl)", de: "Deine Schuhe sind neu" },
+  { rus: "Его джинсы дорогие (Pl)", de: "Seine Jeans sind teuer" },
+  { rus: "Ваша одежда грязная", de: "Ihre Kleidung ist schmutzig" },
+  { rus: "Их куртка чистая", de: "Ihre Jacke ist sauber" },
+  { rus: "Мои штаны новые", de: "Meine Hosen sind neu" },
+  { rus: "Твоя блузка старая", de: "Deine Bluse ist alt" },
+  { rus: "Его футболка дешевая", de: "Sein T-Shirt ist billig" },
+  { rus: "Ее платье дорогое", de: "Ihr Kleid ist teuer" },
+  { rus: "Моя рубашка белая", de: "Mein Hemd ist weiß" },
+  { rus: "Твой шарф черный", de: "Dein Schal ist schwarz" },
+  { rus: "Его пальто серое", de: "Sein Mantel ist grau" },
+  { rus: "Ее юбка коричневая", de: "Ihr Rock ist braun" },
+  { rus: "Его шляпа зеленая", de: "Sein Hut ist grün" },
+  { rus: "Мой свитер красный", de: "Mein Pullover ist rot" },
+  { rus: "Его костюм зеленый", de: "Sein Anzug ist grün" },
+  { rus: "Их одежда оранжевая", de: "Ihre Kleidung ist orange" },
+  { rus: "Ее джинсы голубые (Pl)", de: "Ihre Jeans sind blau" },
+  {
+    rus: "У моего папы есть машина. Он продает свою машину.",
+    de: "Mein Vater hat ein Auto. Er verkauft sein Auto.",
+  },
+  {
+    rus: "У моего друга есть велосипед. Он продает свой велосипед.",
+    de: "Mein Freund hat ein Fahrrad. Er verkauft sein Fahrrad.",
+  },
+  {
+    rus: "У меня есть дом. Я продаю свой дом.",
+    de: "Ich habe ein Haus. Ich verkaufe mein Haus.",
+  },
+  {
+    rus: "У твоей сестры есть кошка. Она продает свою кошку.",
+    de: "Deine Schwester hat eine Katze. Sie verkauft ihre Katze.",
+  },
+  {
+    rus: "У тебя есть сестра. Ты любишь свою сестру.",
+    de: "Du hast eine Schwester. Du liebst deine Schwester.",
+  },
+  {
+    rus: "У его брата есть дом. Он продает свой дом.",
+    de: "Sein Bruder hat ein Haus. Er verkauft sein Haus.",
+  },
+  {
+    rus: "У ее мамы есть машина. Она продает свою машину.",
+    de: "Ihre Mutter hat ein Auto. Sie verkauft ihr Auto.",
+  },
+  {
+    rus: "У нас есть квартира. Мы продаем свою квартиру.",
+    de: "Wir haben eine Wohnung. Wir verkaufen unsere Wohnung.",
+  },
+  {
+    rus: "У вас есть корабль. Вы продаете свой корабль.",
+    de: "Ihr habt ein Schiff. Ihr verkauft euer Schiff.",
+  },
+  {
+    rus: "У наших друзей есть квартира. Они продают свою квартиру.",
+    de: "Unsere Freunde haben eine Wohnung. Sie verkaufen ihre Wohnung.",
+  },
 ];
