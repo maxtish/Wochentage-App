@@ -5,10 +5,6 @@ export type TData = {
   rus: string[];
   de: string[];
 };
-export const pexelsApiKey: string =
-  "Cfy48ri1jRrrQAGWNRMWersVfcLU7hLXJtRf605DQyHottmOu0O2bd0h";
-export const apiKey: string = "AIzaSyAJOmWKykd5DBbB_i0QD44ugQr4Z1NeKfA";
-export const customSearchId: string = "d30090524e2f74072";
 
 export const allData: TData[] = [
   {
