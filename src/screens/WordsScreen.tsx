@@ -3,7 +3,7 @@ import { Words } from "../components/Words";
 import { Text } from "react-native";
 
 const WordsScreen: React.ComponentType = () => {
-  return <Words />;
+  return <Text>ПУСТО</Text>;
 };
 
 export default WordsScreen;

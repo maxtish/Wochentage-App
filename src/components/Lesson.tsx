@@ -1,36 +1,29 @@
 // App.tsx
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  FlatList,
-  ScrollView,
-} from "react-native";
+import { View, Text, Pressable, StyleSheet, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  increment,
   initData,
-  delAll,
   ratingIncrement,
   ratingDecrement,
   addQueue,
   updateButtons,
-  resetCount,
+  increment,
 } from "../store/actions/actions";
 import { stateCounts } from "../store/reducers/count";
-import { TBazaArrayItem, TData, allData } from "../../constants";
+import { TBazaArrayItem, TData } from "../../constants";
 import { IButtonsState, IDataState } from "../store/reducers/data";
 import { useNavigate } from "react-router-native";
-import { ButtonGoBack } from "./ButtonGoBack";
+import { stateLesson } from "../store/reducers/lesson";
+import { ButtonClose } from "./ButtonClose";
 
 export interface IState {
   stateCounts: stateCounts;
   stateData: IDataState;
+  stateLesson: stateLesson;
 }
 
-export const Lesson: React.FC = () => {
+export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
   const defaultColorButton = "#B0C4DE";
   const isGoodColorButton = "#008000";
   const isBadColorButton = "#B22222";
@@ -41,7 +34,8 @@ export const Lesson: React.FC = () => {
   const stateButton = useSelector((state: IState) => state.stateData.button);
   const stateName = useSelector((state: IState) => state.stateData.name);
   const stateQueue = useSelector((state: IState) => state.stateData.queue);
-
+  const { lesson } = useSelector((state: IState) => state.stateLesson);
+  const stateDelay = useSelector((state: IState) => state.stateLesson.delay);
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -95,7 +89,6 @@ export const Lesson: React.FC = () => {
         ? isGoodColorButton
         : isBadColorButton;
     if (stateButton[id] === stateBaza[queue].de) {
-      console.log("YES");
       // УГАДАЛ
       // Обновляем цвет кнопки
       setColorButtons((prevState) => ({
@@ -105,14 +98,15 @@ export const Lesson: React.FC = () => {
 
       setTimeout(() => {
         //код, который должен выполниться после задержки
+        dispatch(increment());
         dispatch(ratingIncrement(queue));
         setColorButtons({});
-        dispatch(increment());
+
         dispatch(updateButtons(shuffleButtons(stateButton)));
-      }, 700);
+      }, stateDelay * 1000);
     } else {
       // НЕ УГАДАЛ
-      console.log("NO");
+
       dispatch(ratingDecrement(queue));
       // Обновляем цвет кнопки
       setColorButtons((prevState) => ({
@@ -122,10 +116,6 @@ export const Lesson: React.FC = () => {
     }
   };
 
-  const closeLesson = () => {
-    dispatch(delAll());
-    dispatch(resetCount());
-  };
   // уроки
 
   interface ILessonButtonProps {
@@ -141,7 +131,7 @@ export const Lesson: React.FC = () => {
     );
   };
 
-  const lessonButtons = allData.map((item: TData, index: number) => (
+  const lessonButtons = lessonData.map((item: TData, index: number) => (
     <LessonButton
       key={index}
       text={item.name}
@@ -156,14 +146,14 @@ export const Lesson: React.FC = () => {
           <Text>Счетчик:{count}</Text>
 
           {Object.keys(stateBaza).length > 0 ? (
-            <Pressable onPress={() => closeLesson()} style={styles.closeButton}>
-              <Text style={styles.closeText}>Закрыть урок</Text>
-            </Pressable>
+            <ButtonClose />
           ) : (
-            <ButtonGoBack />
+            <ButtonClose />
           )}
         </View>
-        <Text style={styles.headerLesson}>Урок: {stateName}</Text>
+        <Text style={styles.headerLesson}>
+          Урок: {lesson} {stateName}
+        </Text>
       </View>
       {Object.keys(stateBaza).length === 0 ? (
         <ScrollView>
@@ -263,13 +253,5 @@ const styles = StyleSheet.create({
   },
   wrapperBottons: {
     gap: 10,
-  },
-  closeButton: {
-    backgroundColor: "#FF6347",
-    borderRadius: 5,
-  },
-  closeText: {
-    paddingHorizontal: 5,
-    borderRadius: 20,
   },
 });

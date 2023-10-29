@@ -1,13 +1,23 @@
 import React, { useState } from "react";
-import { View, Text, Pressable, StyleSheet, FlatList } from "react-native";
-import { wordsData, roomItems, IWord, lesson7 } from "../../constants"; // Подключение ваших массивов
+import {
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  FlatList,
+  ScrollView,
+} from "react-native";
+import { roomItems, IWord, IWordsLesson } from "../../constants"; // Подключение ваших массивов
 import { useNavigate } from "react-router-native";
 import { ButtonGoBack } from "./ButtonGoBack";
+import { ButtonClose } from "./ButtonClose";
 
-export const Words: React.FC = () => {
+export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({
+  lessonWorlds,
+}) => {
   const [visibleItemId, setVisibleItemId] = useState<string | null>(null);
-  const [activeArray, setActiveArray] = useState(roomItems);
-  const [activeButton, setActiveButton] = useState("im Zimmer"); // Используем активную кнопку
+  const [activeArray, setActiveArray] = useState(lessonWorlds[0].data);
+  const [activeButton, setActiveButton] = useState(lessonWorlds[0].name); // Используем активную кнопку
 
   const handleArrayChange = (arr: IWord[], buttonName: string) => {
     setActiveArray(arr);
@@ -18,37 +28,24 @@ export const Words: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.goBack}>
-        <ButtonGoBack />
+        <ButtonClose />
       </View>
-      <View style={styles.buttonContainer}>
-        <Pressable
-          style={[
-            styles.button,
-            activeButton === "Alle" && styles.activeButton,
-          ]}
-          onPress={() => handleArrayChange(wordsData, "Alle")}
-        >
-          <Text style={styles.buttonText}>Alle</Text>
-        </Pressable>
-        <Pressable
-          style={[
-            styles.button,
-            activeButton === "im Zimmer" && styles.activeButton,
-          ]}
-          onPress={() => handleArrayChange(roomItems, "im Zimmer")}
-        >
-          <Text style={styles.buttonText}>im Zimmer</Text>
-        </Pressable>
-        <Pressable
-          style={[
-            styles.button,
-            activeButton === "Lektion 7" && styles.activeButton,
-          ]}
-          onPress={() => handleArrayChange(lesson7, "Lektion 7")}
-        >
-          <Text style={styles.buttonText}>Lektion 7</Text>
-        </Pressable>
-      </View>
+      <ScrollView horizontal={true} style={styles.buttonContainer}>
+        {lessonWorlds.map((item, index) => {
+          return (
+            <Pressable
+              key={index}
+              style={[
+                styles.button,
+                activeButton === item.name && styles.activeButton,
+              ]}
+              onPress={() => handleArrayChange(item.data, item.name)}
+            >
+              <Text style={styles.buttonText}>{item.name}</Text>
+            </Pressable>
+          );
+        })}
+      </ScrollView>
 
       <FlatList
         data={activeArray}
@@ -108,8 +105,6 @@ const styles = StyleSheet.create({
     opacity: 1,
   },
   buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
     marginBottom: 10,
   },
   button: {

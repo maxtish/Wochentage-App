@@ -1,3 +1,4 @@
+import { Interface } from "readline";
 import { IDataItem } from "./src/store/reducers/data";
 
 export type TData = {
@@ -5,8 +6,14 @@ export type TData = {
   rus: string[];
   de: string[];
 };
+export type TBazaArrayItem = Array<[string, IDataItem]>;
+export interface IWord {
+  rus: string;
+  de: string;
+}
 
-export const allData: TData[] = [
+//// УГАДАЙ
+export const Lesson1Quess: TData[] = [
   {
     name: "Дни недели",
     rus: [
@@ -48,8 +55,11 @@ export const allData: TData[] = [
     rus: ["Ich", "Du", "Er/Sie/Es", "Wir", "Ihr", "Sie"],
     de: ["bin", "bist", "ist", "sind", "seid", "sind"],
   },
+];
+
+export const Lesson6Quess: TData[] = [
   {
-    name: "6: Модальные глаголы",
+    name: "Модальные глаголы",
     rus: [
       "мочь, иметь разрешение",
       "мочь, уметь",
@@ -112,44 +122,57 @@ export const allData: TData[] = [
     rus: ["Ich", "Du", "Er/Sie/Es", "Wir", "Ihr", "Sie"],
     de: ["weiß", "weißt", "weiß", "wissen", "wisst", "wissen"],
   },
+];
+
+export const Lesson7Quess: TData[] = [
   {
-    name: "7: Притяжательные местоимения",
-    rus: [
-      "Ich",
-      "Du",
-      "Er",
-      "sie(она)",
-      "Es",
-      "Wir",
-      "Ihr",
-      "sie(они)",
-      "Sie(Вы)",
-    ],
+    name: "Притяжательные местоимения",
+    rus: ["мой / моя", "твой / твоя", "его", "её", "наш", "ваш", "их", "Ваш"],
     de: [
-      "mein (мой)",
-      "dein (твой)",
-      "sein (его)",
-      "ihr (ее)",
-      "sein (его)",
-      "unser (наш)",
-      "euer (ваш)",
-      "ihr (их)",
-      "Ihr (Ваш)",
+      "mein / meine",
+      "dein / deine",
+      "sein / seine",
+      "ihr / ihre",
+      "unser / unsere",
+      "euer / eure",
+      "ihr / ihre",
+      "Ihr / Ihre",
     ],
   },
 ];
 
-// Интерфейс для элемента массива bazaArray
-export type TBazaArrayItem = Array<[string, IDataItem]>;
+export const Lesson8Quess: TData[] = [
+  {
+    name: "Вопросы 1",
+    rus: ["Что?", "Кто?", "Кого?", "Кому?", "Как?", "Где?", "Почему?"],
+    de: ["Was?", "Wer?", "Wen?", "Wem?", "Wie?", "Wo?", "Warum?"],
+  },
+
+  {
+    name: "Вопросы 2",
+    rus: [
+      "Когда?",
+      "Откуда?",
+      "Куда?",
+      "Сколько? (как много)",
+      "Сколько? (как долго)",
+      "Чей?",
+      "Какой?",
+    ],
+    de: [
+      "Wann?",
+      "Woher?",
+      "Wohin?",
+      "Wie viel?",
+      "Wie lange?",
+      "Wessen?",
+      "Welcher?",
+    ],
+  },
+];
 
 //// СЛОВА
-
-export interface IWord {
-  rus: string;
-  de: string;
-}
-
-export const wordsData: IWord[] = [
+export const lesson1WordsArr: IWord[] = [
   { rus: "Мужчина. Муж.", de: "Der Mann" },
   { rus: "Женщина. Жена.", de: "Die Frau" },
   { rus: "Мальчик.", de: "Der Junge" },
@@ -256,6 +279,8 @@ export const wordsData: IWord[] = [
   { rus: "завтра", de: "Morgen" },
   { rus: "правильно", de: "Richtig" },
   { rus: "неправильно", de: "Falsch" },
+];
+export const lesson1sentence: IWord[] = [
   { rus: "Ты ешь много", de: "Du isst viel" },
   { rus: "Она ест мало", de: "Sie isst wenig" },
   { rus: "Ты даешь книгу", de: "Du gibst ein Buch" },
@@ -298,55 +323,9 @@ export const wordsData: IWord[] = [
   { rus: "Он ездит неправильно", de: "Er fährt falsch" },
   { rus: "Ты носишь брюки", de: "Du trägst die Hose" },
   { rus: "Она носит платье", de: "Sie trägt das Kleid" },
-  { rus: "Ему можно быстро бегать", de: "Er darf schnell laufen" },
-  { rus: "Она умеет красиво петь", de: "Sie kann schön singen" },
-  { rus: "Нам можно громко петь", de: "Wir dürfen laut singen" },
-  { rus: "Он умеет быстро бегать", de: "Er kann schnell laufen" },
-  { rus: "Им можно тихо поиграть", de: "Sie dürfen leise spielen" },
-  { rus: "Ему можно спросить", de: "Er darf fragen" },
-  { rus: "Мы умеем хорошо танцевать", de: "Wir können gut tanzen" },
-  { rus: "Я могу ответить", de: "Ich kann antworten" },
-  { rus: "Она может быстро читать", de: "Sie kann schnell lesen" },
-  { rus: "Он может много выпить", de: "Er kann viel trinken" },
-  { rus: "Отец умеет быстро ездить", de: "Der Vater kann schnell fahren" },
-  { rus: "Мама умеет хорошо готовить", de: "Die Mutter kann gut kochen" },
-  { rus: "Дедушка может долго спать", de: "Der Opa kann lange schlafen" },
-  { rus: "Брат может высоко прыгать", de: "Der Bruder kann hoch springen" },
-  { rus: "Он обязан учить немецкий", de: "Er soll Deutsch lernen" },
-  { rus: "Она обязана хорошо танцевать", de: "Sie soll gut tanzen" },
-  { rus: "Я должен хорошо учиться", de: "Ich muss gut lernen" },
-  { rus: "Я должен сегодня играть", de: "Ich muss heute spielen" },
-  { rus: "Ты обязан завтра помочь", de: "Du sollst morgen helfen" },
-  { rus: "Она должна сегодня написать", de: "Sie muss heute schreiben" },
-  { rus: "Вам (ihr) надо покушать", de: "Ihr müsst essen" },
-  { rus: "Они обязаны прийти!", de: "Sie sollen kommen!" },
-  { rus: "Ты должен помочь", de: "Du musst helfen" },
-  { rus: "Мы обязаны работать", de: "Wir sollen arbeiten" },
-  { rus: "Ты обязан учить немецкий!", de: "Du sollst Deutsch lernen" },
-  { rus: "Она обязана помочь", de: "Sie soll helfen" },
-  { rus: "Тебе надо учить немецкий", de: "Du musst Deutsch lernen" },
-  { rus: "Я люблю пиццу", de: "Ich mag Pizza" },
-  { rus: "Я хочу купить пиццу", de: "Ich will Pizza kaufen" },
-  { rus: "Я хотел бы заказать пиццу", de: "Ich möchte Pizza bestellen" },
-  { rus: "Она любит английский", de: "Sie mag Englisch" },
-  { rus: "Он хотел бы учить немецкий", de: "Er möchte Deutsch lernen" },
-  { rus: "Она хотела бы танцевать", de: "Sie möchte tanzen" },
-  {
-    rus: "Мы хотим сегодня купить велосипед",
-    de: "Wir wollen heute ein Fahrrad kaufen",
-  },
-  { rus: "Он хочет есть", de: "Er will essen" },
-  { rus: "Ты любишь футбол", de: "Du magst Fußball" },
-  { rus: "Я хочу пить", de: "Ich will trinken" },
-  { rus: "Мы хотим купить машину", de: "Wir wollen ein Auto kaufen" },
-  { rus: "Мы хотели бы выпить колы", de: "Wir möchten Cola trinken" },
-  { rus: "Они хотят помочь", de: "Sie wollen helfen" },
-  { rus: "Я люблю немецкий", de: "Ich mag Deutsch" },
-  { rus: "Вы (ihr) любите танцевать", de: "Ihr mögt Musik" },
-  { rus: "Они хотят купить машину", de: "Sie wollen ein Auto kaufen" },
 ];
-
 export const roomItems: IWord[] = [
+  { rus: "мобильный телефон", de: "Das Handy" },
   { rus: "диван", de: "Das Sofa" },
   { rus: "стул", de: "Der Stuhl" },
   { rus: "ручка", de: "Der Stift" },
@@ -395,8 +374,270 @@ export const roomItems: IWord[] = [
   { rus: "зеркало", de: "Der Spiegel" },
   { rus: "вешалка", de: "Der Kleiderbügel" },
 ];
+export const lesson1_1sentence: IWord[] = [
+  {
+    rus: "В комнате есть стул.",
+    de: "In dem Zimmer ist ein Stuhl.",
+  },
+  {
+    rus: "Стул стоит на ковре.",
+    de: "Der Stuhl steht auf dem Teppich.",
+  },
+  {
+    rus: "Ковер лежит на полу.",
+    de: "Der Teppich liegt auf dem Boden.",
+  },
+  {
+    rus: "На столе стоит ваза.",
+    de: "Auf dem Tisch steht eine Vase.",
+  },
+  {
+    rus: "Очки лежат рядом с вазой.",
+    de: "Die Brille liegt neben der Vase.",
+  },
+  {
+    rus: "Ковер находится под столом.",
+    de: "Der Teppich ist unter dem Tisch.",
+  },
+  {
+    rus: "На столе лежит ручка.",
+    de: "Auf dem Tisch liegt ein Stift.",
+  },
+  {
+    rus: "Мобильный телефон находится рядом с очками.",
+    de: "Das Handy ist neben der Brille.",
+  },
+  {
+    rus: "Лампа стоит на шкафу.",
+    de: "Die Lampe steht auf dem Schrank.",
+  },
+  {
+    rus: "Газета лежит на диване.",
+    de: "Die Zeitung liegt auf dem Sofa.",
+  },
+  {
+    rus: "Цветок находится в вазе.",
+    de: "Die Blume ist in der Vase.",
+  },
+  {
+    rus: "Книга лежит на полке.",
+    de: "Das Buch liegt auf dem Regal.",
+  },
+  {
+    rus: "Зеркало висит на стене.",
+    de: "Der Spiegel hängt an der Wand.",
+  },
+  {
+    rus: "Телевизор стоит на телестойке.",
+    de: "Der Fernseher steht auf dem TV-Ständer.",
+  },
+  {
+    rus: "Подушка лежит на кровати.",
+    de: "Das Kissen liegt auf dem Bett.",
+  },
+  {
+    rus: "Картина висит над диваном.",
+    de: "Das Bild hängt über dem Sofa.",
+  },
+  {
+    rus: "Чашка стоит на чашке.",
+    de: "Die Tasse steht auf der Tasse.",
+  },
+  {
+    rus: "Обувь стоит перед дверью.",
+    de: "Die Schuhe stehen vor der Tür.",
+  },
+  {
+    rus: "Шкаф находится рядом с окном.",
+    de: "Der Schrank ist neben dem Fenster.",
+  },
+  {
+    rus: "Гитара стоит в углу.",
+    de: "Die Gitarre steht in der Ecke.",
+  },
+  {
+    rus: "Постер висит на двери.",
+    de: "Das Poster hängt an der Tür.",
+  },
+  {
+    rus: "Ручка лежит под книгой.",
+    de: "Der Stift ist unter dem Buch.",
+  },
+  {
+    rus: "Блузка висит в шкафу.",
+    de: "Die Bluse hängt im Schrank.",
+  },
+  {
+    rus: "Чашка стоит на подставке.",
+    de: "Die Tasse steht auf dem Untersetzer.",
+  },
+  {
+    rus: "Будильник лежит на ночном столике.",
+    de: "Der Wecker liegt auf dem Nachttisch.",
+  },
+  {
+    rus: "Куртка висит на вешалке.",
+    de: "Die Jacke hängt an der Garderobe.",
+  },
+  {
+    rus: "Плюшевый мишка лежит на подушке.",
+    de: "Das Kuscheltier liegt auf dem Kissen.",
+  },
+  {
+    rus: "Тарелки находятся в шкафу.",
+    de: "Die Teller sind im Schrank.",
+  },
+  {
+    rus: "Сумка стоит на стуле.",
+    de: "Die Tasche steht auf dem Stuhl.",
+  },
+  {
+    rus: "Игрушки лежат на полу.",
+    de: "Das Spielzeug liegt auf dem Boden.",
+  },
+  {
+    rus: "Картина висит на стене.",
+    de: "Das Gemälde hängt an der Wand.",
+  },
+  {
+    rus: "Пульт от телевизора лежит на диване.",
+    de: "Die Fernbedienung liegt auf dem Sofa.",
+  },
+  {
+    rus: "Чашка стоит на столе.",
+    de: "Die Tasse steht auf dem Tisch.",
+  },
+  {
+    rus: "Ключ лежит на комоде.",
+    de: "Der Schlüssel liegt auf der Kommode.",
+  },
+  {
+    rus: "Цветок стоит на подоконнике.",
+    de: "Die Blume steht auf dem Fensterbrett.",
+  },
+  {
+    rus: "Картина висит над кроватью.",
+    de: "Das Bild hängt über dem Bett.",
+  },
+  {
+    rus: "Шапка лежит на шкафу.",
+    de: "Die Mütze liegt auf dem Schrank.",
+  },
+  {
+    rus: "Книга лежит под подушкой.",
+    de: "Das Buch ist unter dem Kissen.",
+  },
+  {
+    rus: "Ноутбук стоит на столе.",
+    de: "Der Laptop steht auf dem Schreibtisch.",
+  },
+  {
+    rus: "Газета лежит на столе.",
+    de: "Die Zeitung liegt auf dem Tisch.",
+  },
+  {
+    rus: "Одеяло лежит на диване.",
+    de: "Die Decke liegt auf dem Sofa.",
+  },
+  {
+    rus: "Очки стоят на столе.",
+    de: "Die Brille liegt auf dem Nachttisch.",
+  },
+  {
+    rus: "Куртка висит на вешалке.",
+    de: "Die Jacke hängt am Haken.",
+  },
+  {
+    rus: "Игрушки лежат под стулом.",
+    de: "Das Spielzeug liegt unter dem Stuhl.",
+  },
+  {
+    rus: "Картина висит над столом.",
+    de: "Das Gemälde hängt über dem Schreibtisch.",
+  },
+  {
+    rus: "Ручка лежит на полке.",
+    de: "Der Stift liegt auf dem Regal.",
+  },
+  {
+    rus: "Блузка висит на стене.",
+    de: "Die Bluse hängt an der Wand.",
+  },
+];
+export const lesson1_1WordsArr: IWord[] = [
+  { rus: "ложка", de: "Der Löffel" },
+  { rus: "вилка", de: "Die Gabel" },
+  { rus: "нож", de: "Das Messer" },
+  { rus: "тарелка", de: "Der Teller" },
+  { rus: "чашка", de: "Die Tasse" },
+  { rus: "блюдце", de: "Die Untertasse" },
+  { rus: "чайник", de: "Die Teekanne" },
+  { rus: "чайная ложка", de: "Der Teelöffel" },
+  { rus: "сахарница", de: "Der Zuckertopf" },
+  { rus: "сольница", de: "Der Salzstreuer" },
+  { rus: "перечница", de: "Der Pfefferstreuer" },
+  { rus: "бокал", de: "Das Glas" },
+  { rus: "столовая ложка", de: "Der Esslöffel" },
+  { rus: "винный бокал", de: "Das Weinglas" },
+  { rus: "кружка", de: "Der Krug" },
+  { rus: "салатник", de: "Die Salatschüssel" },
+  { rus: "поднос", de: "Das Tablett" },
+  { rus: "доска для нарезки", de: "Das Schneidebrett" },
+  { rus: "салфетка", de: "Die Serviette" },
+  { rus: "открывашка", de: "Der Flaschenöffner" },
+  { rus: "винтовка", de: "Der Korkenzieher" },
+  { rus: "скатерть", de: "Die Tischdecke" },
+];
 
-export const lesson7: IWord[] = [
+export const lesson6sentence: IWord[] = [
+  { rus: "Ему можно быстро бегать", de: "Er darf schnell laufen" },
+  { rus: "Она умеет красиво петь", de: "Sie kann schön singen" },
+  { rus: "Нам можно громко петь", de: "Wir dürfen laut singen" },
+  { rus: "Он умеет быстро бегать", de: "Er kann schnell laufen" },
+  { rus: "Им можно тихо поиграть", de: "Sie dürfen leise spielen" },
+  { rus: "Ему можно спросить", de: "Er darf fragen" },
+  { rus: "Мы умеем хорошо танцевать", de: "Wir können gut tanzen" },
+  { rus: "Я могу ответить", de: "Ich kann antworten" },
+  { rus: "Она может быстро читать", de: "Sie kann schnell lesen" },
+  { rus: "Он может много выпить", de: "Er kann viel trinken" },
+  { rus: "Отец умеет быстро ездить", de: "Der Vater kann schnell fahren" },
+  { rus: "Мама умеет хорошо готовить", de: "Die Mutter kann gut kochen" },
+  { rus: "Дедушка может долго спать", de: "Der Opa kann lange schlafen" },
+  { rus: "Брат может высоко прыгать", de: "Der Bruder kann hoch springen" },
+  { rus: "Он обязан учить немецкий", de: "Er soll Deutsch lernen" },
+  { rus: "Она обязана хорошо танцевать", de: "Sie soll gut tanzen" },
+  { rus: "Я должен хорошо учиться", de: "Ich muss gut lernen" },
+  { rus: "Я должен сегодня играть", de: "Ich muss heute spielen" },
+  { rus: "Ты обязан завтра помочь", de: "Du sollst morgen helfen" },
+  { rus: "Она должна сегодня написать", de: "Sie muss heute schreiben" },
+  { rus: "Вам (ihr) надо покушать", de: "Ihr müsst essen" },
+  { rus: "Они обязаны прийти!", de: "Sie sollen kommen!" },
+  { rus: "Ты должен помочь", de: "Du musst helfen" },
+  { rus: "Мы обязаны работать", de: "Wir sollen arbeiten" },
+  { rus: "Ты обязан учить немецкий!", de: "Du sollst Deutsch lernen" },
+  { rus: "Она обязана помочь", de: "Sie soll helfen" },
+  { rus: "Тебе надо учить немецкий", de: "Du musst Deutsch lernen" },
+  { rus: "Я люблю пиццу", de: "Ich mag Pizza" },
+  { rus: "Я хочу купить пиццу", de: "Ich will Pizza kaufen" },
+  { rus: "Я хотел бы заказать пиццу", de: "Ich möchte Pizza bestellen" },
+  { rus: "Она любит английский", de: "Sie mag Englisch" },
+  { rus: "Он хотел бы учить немецкий", de: "Er möchte Deutsch lernen" },
+  { rus: "Она хотела бы танцевать", de: "Sie möchte tanzen" },
+  {
+    rus: "Мы хотим сегодня купить велосипед",
+    de: "Wir wollen heute ein Fahrrad kaufen",
+  },
+  { rus: "Он хочет есть", de: "Er will essen" },
+  { rus: "Ты любишь футбол", de: "Du magst Fußball" },
+  { rus: "Я хочу пить", de: "Ich will trinken" },
+  { rus: "Мы хотим купить машину", de: "Wir wollen ein Auto kaufen" },
+  { rus: "Мы хотели бы выпить колы", de: "Wir möchten Cola trinken" },
+  { rus: "Они хотят помочь", de: "Sie wollen helfen" },
+  { rus: "Я люблю немецкий", de: "Ich mag Deutsch" },
+  { rus: "Вы (ihr) любите танцевать", de: "Ihr mögt Musik" },
+  { rus: "Они хотят купить машину", de: "Sie wollen ein Auto kaufen" },
+];
+export const lesson7WordArr: IWord[] = [
   { rus: "пиджак", de: "Der Anzug" },
   { rus: "свитер", de: "Der Pullover" },
   { rus: "шляпа", de: "Der Hut" },
@@ -426,6 +667,8 @@ export const lesson7: IWord[] = [
   { rus: "Белый", de: "Weiß" },
   { rus: "Коричневый", de: "Braun" },
   { rus: "Серый", de: "Grau" },
+];
+export const lesson7Sentence: IWord[] = [
   { rus: "Это мой костюм", de: "Das ist mein Anzug" },
   { rus: "Это твой свитер", de: "Das ist dein Pullover" },
   { rus: "Это его шляпа", de: "Das ist sein Hut" },
@@ -504,4 +747,101 @@ export const lesson7: IWord[] = [
     rus: "У наших друзей есть квартира. Они продают свою квартиру.",
     de: "Unsere Freunde haben eine Wohnung. Sie verkaufen ihre Wohnung.",
   },
+];
+
+export const lesson8_1Sentence: IWord[] = [
+  { rus: "Ты сильный?", de: "Bist du stark?" },
+  { rus: "Она молодая?", de: "Ist sie jung?" },
+  { rus: "Он сильный?", de: "Ist er stark?" },
+  { rus: "Твой папа умный?", de: "Ist dein Vater klug?" },
+  { rus: "Ее мама красивая?", de: "Ist ihre Mutter schön?" },
+  { rus: "У вас (ihr) есть квартира?", de: "Habt ihr eine Wohnung?" },
+  { rus: "У тебя есть машина?", de: "Hast du ein Auto?" },
+  { rus: "У твоего папы есть сестра?", de: "Hat dein Vater eine Schwester?" },
+  { rus: "У его сестры есть кошка?", de: "Hat seine Schwester eine Katze?" },
+  { rus: "Ты спишь?", de: "Schläfst du?" },
+  { rus: "Он ездит быстро?", de: "Fährt er schnell?" },
+  { rus: "Ты покупаешь мою машину?", de: "Kaufst du mein Auto?" },
+  { rus: "Она поет хорошо?", de: "Singt sie gut?" },
+  { rus: "Ты едешь?", de: "Fährst du?" },
+  { rus: "Вы (Sie) пьете чай?", de: "Trinken Sie Tee?" },
+  { rus: "Ты читаешь?", de: "Liest du?" },
+  { rus: "Ты хочешь поиграть?", de: "Willst du spielen?" },
+  { rus: "Ей можно здесь бегать?", de: "Darf sie hier laufen?" },
+  { rus: "Вы (Ihr) можете помочь?", de: "Könnt ihr helfen?" },
+  { rus: "Ты хочешь тоже заказать?", de: "Willst du auch bestellen?" },
+  { rus: "Должен ли я помочь?", de: "Soll ich helfen?" },
+  { rus: "Ты должен учить немецкий?", de: "Musst du Deutsch lernen?" },
+];
+export const lesson8_2Sentence: IWord[] = [
+  { rus: "Почему ты такой сильный?", de: "Warum bist du so stark?" },
+  { rus: "Почему он такой слабый?", de: "Warum ist er so schwach?" },
+  { rus: "Сколько у тебя твоя машина?", de: "Wie lange hast du dein Auto?" },
+  { rus: "Когда ты спишь?", de: "Wann schläfst du?" },
+  { rus: "Где ты покупаешь машину?", de: "Wo kaufst du das Auto?" },
+  { rus: "Где ты едешь?", de: "Wo fährst du?" },
+  { rus: "Где ты хочешь играть?", de: "Wo willst du spielen?" },
+  { rus: "Кому можно здесь бегать?", de: "Wer darf hier laufen?" },
+  { rus: "Когда вы (ihr) можете помочь?", de: "Wann könnt ihr helfen?" },
+  { rus: "Что ты хочешь заказать?", de: "Was möchtest du bestellen?" },
+  { rus: "Кому я должен помочь?", de: "Wem soll ich helfen?" },
+  {
+    rus: "Почему я должен учить немецкий?",
+    de: "Warum soll ich Deutsch lernen?",
+  },
+  { rus: "Кто хочет танцевать?", de: "Wer will tanzen?" },
+  { rus: "Что ты хочешь заказать?", de: "Was möchtest du bestellen?" },
+  { rus: "Кому ты даришь машину?", de: "Wem schenkst du das Auto?" },
+  { rus: "Где он живет?", de: "Wo wohnt er?" },
+  { rus: "Где она играет?", de: "Wo spielt sie?" },
+  { rus: "Как долго он учит немецкий?", de: "Wie lange lernt er Deutsch?" },
+  { rus: "Как тебя зовут?", de: "Wie heißt du?" },
+  { rus: "Где ты живешь?", de: "Wo wohnst du?" },
+  { rus: "Что ты делаешь?", de: "Was machst du?" },
+  { rus: "Кому ты помогаешь?", de: "Wem hilfst du?" },
+  { rus: "Кого ты любишь?", de: "Wen liebst du?" },
+  { rus: "Откуда ты едешь?", de: "Woher fährst du?" },
+  { rus: "Куда ты идешь?", de: "Wohin gehst du?" },
+  {
+    rus: "Сколько ты уже учишь немецкий?",
+    de: "Wie lange lernst du schon Deutsch.",
+  },
+  { rus: "Сколько ты спишь?", de: "Wie lange schläfst du?" },
+  { rus: "Когда ты приедешь?", de: "Wann kommst du?" },
+  { rus: "Как его зовут?", de: "Wie heißt er?" },
+  { rus: "Где он живет?", de: "Wo wohnt er?" },
+  { rus: "Что он делает?", de: "Was macht er?" },
+  { rus: "Кому он помогает?", de: "Wem hilft er?" },
+  { rus: "Кого он любит?", de: "Wen liebt er?" },
+  { rus: "Откуда он едет?", de: "Woher fährt er?" },
+  { rus: "Куда он идет?", de: "Wohin geht er?" },
+  {
+    rus: "Сколько он уже учит немецкий?",
+    de: "Wie lange lernt er schon Deutsch.",
+  },
+  { rus: "Сколько он спит?", de: "Wie lange schläft er?" },
+  { rus: "Когда он приедет?", de: "Wann kommt er?" },
+];
+
+export type IWordsLesson = { name: string; data: IWord[] };
+export const lesson1Words: IWordsLesson[] = [
+  { name: "Слова", data: lesson1WordsArr },
+  { name: "Предложения", data: lesson1sentence },
+  { name: "Предметы существительные", data: roomItems },
+  { name: "Фразы предметы в комнате", data: lesson1_1sentence },
+  { name: "Cтоловые предметы", data: lesson1_1WordsArr },
+];
+
+export const lesson6Words: IWordsLesson[] = [
+  { name: "Предложения", data: lesson6sentence },
+];
+
+export const lesson7Words: IWordsLesson[] = [
+  { name: "Слова", data: lesson7WordArr },
+  { name: "Предложения", data: lesson7Sentence },
+];
+
+export const lesson8Words: IWordsLesson[] = [
+  { name: "Задать вопросы", data: lesson8_1Sentence },
+  { name: "Вопросы с вопросительным словом", data: lesson8_2Sentence },
 ];

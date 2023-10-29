@@ -6,11 +6,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import countReducer from "./reducers/count"; // Импортируйте редюсер
 import { Persistor } from "redux-persist/es/types";
 import dataReducer from "./reducers/data";
+import lessonReducer from "./reducers/lesson";
 
 // Создайте корневой редюсер
 const rootReducer = combineReducers({
   stateCounts: countReducer,
   stateData: dataReducer,
+  stateLesson: lessonReducer,
 });
 
 const persistConfig = {

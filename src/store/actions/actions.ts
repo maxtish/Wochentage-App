@@ -1,5 +1,5 @@
-import { TBazaArrayItem, TData } from "../../../constants";
-import { IButtonsState, IDataItem } from "../reducers/data";
+import { IWordsLesson, TBazaArrayItem, TData } from "../../../constants";
+import { IButtonsState } from "../reducers/data";
 
 // actions.ts
 export const increment = () => ({
@@ -43,6 +43,37 @@ export const resetCount = () => ({
   type: "RESET_COUNT" as const,
 });
 
+export const lessonInit = (lesson: number) => ({
+  type: "LESSON_INIT" as const,
+  lesson,
+});
+
+export const lessonReset = () => ({
+  type: "LESSON_RESET" as const,
+});
+
+export const lessonQuessInit = (guess: TData[]) => ({
+  type: "LESSON_QUESS_INIT" as const,
+  guess,
+});
+
+export const lessonWordsInit = (words: IWordsLesson[]) => ({
+  type: "LESSON_WORDS_INIT" as const,
+  words,
+});
+
+export const lessonMenuOpen = () => ({
+  type: "LESSON_MENU_OPEN" as const,
+});
+
+export const lessonMenuClose = () => ({
+  type: "LESSON_MENU_CLOSE" as const,
+});
+
+export const lessonDelayInit = (delay: number) => ({
+  type: "LESSON_DELAY_INIT" as const,
+  delay,
+});
 export type ActionTypes = ReturnType<
   | typeof increment
   | typeof decrement
@@ -53,4 +84,11 @@ export type ActionTypes = ReturnType<
   | typeof addQueue
   | typeof updateButtons
   | typeof resetCount
+  | typeof lessonInit
+  | typeof lessonReset
+  | typeof lessonQuessInit
+  | typeof lessonWordsInit
+  | typeof lessonMenuOpen
+  | typeof lessonMenuClose
+  | typeof lessonDelayInit
 >;
