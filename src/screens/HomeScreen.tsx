@@ -63,7 +63,9 @@ const HomeScreen: React.ComponentType = () => {
   const stateDelay = useSelector((state: IState) => state.stateLesson.delay);
 
   const handleInputChange = (time: string) => {
-    setInputValue(time); // Обновление состояния при вводе текста
+    if (!isNaN(Number(time))) {
+      setInputValue(time); // Обновление состояния при вводе текста, если введено число
+    }
   };
 
   const handleSubmit = () => {
@@ -109,6 +111,7 @@ const HomeScreen: React.ComponentType = () => {
         <Text>Введите значение задержки:</Text>
         <TextInput
           style={styles.input}
+          inputMode="numeric"
           value={`${inputValue}`}
           onChangeText={handleInputChange}
           placeholder={`Задержка: ${stateDelay} сек`}
