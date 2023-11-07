@@ -74,6 +74,23 @@ export const lessonDelayInit = (delay: number) => ({
   type: "LESSON_DELAY_INIT" as const,
   delay,
 });
+
+export const allWordsInit = (allWords: string[]) => ({
+  type: "ALL_WORDS_INIT" as const,
+  allWords,
+});
+
+export const allWordsIncrement = () => ({
+  type: "ALL_WORDS_INCREMENT" as const,
+});
+
+export const allWordsDecrement = () => ({
+  type: "ALL_WORDS_DECREMENT" as const,
+});
+export const allWordsResetCount = () => ({
+  type: "ALL_WORDS_RESET_COUNT" as const,
+});
+
 export type ActionTypes = ReturnType<
   | typeof increment
   | typeof decrement
@@ -91,4 +108,8 @@ export type ActionTypes = ReturnType<
   | typeof lessonMenuOpen
   | typeof lessonMenuClose
   | typeof lessonDelayInit
+  | typeof allWordsInit
+  | typeof allWordsIncrement
+  | typeof allWordsDecrement
+  | typeof allWordsResetCount
 >;

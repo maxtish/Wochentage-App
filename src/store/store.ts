@@ -7,12 +7,14 @@ import countReducer from "./reducers/count"; // Импортируйте ред�
 import { Persistor } from "redux-persist/es/types";
 import dataReducer from "./reducers/data";
 import lessonReducer from "./reducers/lesson";
+import imageAndTextReducer from "./reducers/imageAndText";
 
 // Создайте корневой редюсер
 const rootReducer = combineReducers({
   stateCounts: countReducer,
   stateData: dataReducer,
   stateLesson: lessonReducer,
+  stateImageAndText: imageAndTextReducer,
 });
 
 const persistConfig = {

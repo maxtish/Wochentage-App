@@ -16,11 +16,13 @@ import { IButtonsState, IDataState } from "../store/reducers/data";
 import { useNavigate } from "react-router-native";
 import { stateLesson } from "../store/reducers/lesson";
 import { ButtonClose } from "./ButtonClose";
+import { stateImageAndText } from "../store/reducers/imageAndText";
 
 export interface IState {
   stateCounts: stateCounts;
   stateData: IDataState;
   stateLesson: stateLesson;
+  stateImageAndText: stateImageAndText;
 }
 
 export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
@@ -30,6 +32,7 @@ export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
   const dispatch = useDispatch();
   type TButtonEntry = [string, string];
   const { count } = useSelector((state: IState) => state.stateCounts);
+  console.log(count);
   const stateBaza = useSelector((state: IState) => state.stateData.baza);
   const stateButton = useSelector((state: IState) => state.stateData.button);
   const stateName = useSelector((state: IState) => state.stateData.name);

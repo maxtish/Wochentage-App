@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  TextInput,
-  Button,
-} from "react-native";
+import { View, Text, StyleSheet, Pressable, TextInput } from "react-native";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-native";
 import {
@@ -28,10 +21,17 @@ import {
 } from "../../constants";
 import { IState } from "../components/Lesson";
 import { useSelector } from "react-redux";
+import { persistor } from "../store/store";
 
 const HomeScreen: React.ComponentType = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleClearCache = () => {
+    persistor.purge().then(() => {
+      // Очистка кэша
+    });
+  };
 
   const ToLesson = (name: string, numLesson: number) => {
     dispatch(lessonInit(numLesson));
@@ -59,6 +59,7 @@ const HomeScreen: React.ComponentType = () => {
 
     navigate("/lesson", { state: { lesson: name } });
   };
+
   const [inputValue, setInputValue] = useState(""); // Состояние для хранения введенного значения
   const stateDelay = useSelector((state: IState) => state.stateLesson.delay);
 
@@ -120,6 +121,17 @@ const HomeScreen: React.ComponentType = () => {
           <Text>Отправить</Text>
         </Pressable>
       </View>
+
+      <Pressable
+        style={styles.buttonsNavi}
+        onPress={() => navigate("/imagesAndWords")}
+      >
+        <Text style={styles.buttonsText}>Угадай картинку</Text>
+      </Pressable>
+
+      <Pressable style={styles.buttonClearCache} onPress={handleClearCache}>
+        <Text style={styles.buttonsText}>Очистить кэш</Text>
+      </Pressable>
     </View>
   );
 };
@@ -136,6 +148,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#20B2AA",
     borderRadius: 5,
   },
+
+  buttonClearCache: {
+    width: "50%",
+    backgroundColor: "red",
+    borderRadius: 5,
+  },
+
   buttonsText: {
     textAlign: "center",
     fontSize: 25,
