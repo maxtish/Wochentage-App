@@ -109,9 +109,12 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#DCDCDC",
-    padding: 10,
-    margin: 5,
+    fontWeight: "600",
+    fontSize: 20,
     borderRadius: 5,
+    marginRight: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   activeButton: {
     backgroundColor: "#888",
@@ -121,6 +124,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   goBack: {
+    margin: 20,
     width: "100%",
     flexDirection: "row",
     justifyContent: "flex-end",

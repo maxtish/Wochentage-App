@@ -24,5 +24,5 @@ const App = () => {
   );
 };
 
-AppRegistry.registerComponent("Wochentage", () => App);
+AppRegistry.registerComponent("Dawai-Dawai", () => App);
 export default App;
