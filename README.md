@@ -1,6 +1,6 @@
 # Приложение "Dawai-Dawai"
 
-Это мобильное приложение на React Native, которое поможет вам изучать немецкий язык. ![Screenshot](Screenshot_2023-10-08-21-01-16-570_com.rdmax.wochentage.jpg)
+Это мобильное приложение на React Native, которое поможет вам изучать немецкий язык. ![Screenshot](Screenshot_2023-10-08-21-01-16-570_com.rdmax.wochentage.jpg){:width="320px"}
 
 ## Описание
 
