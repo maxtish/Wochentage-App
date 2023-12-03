@@ -1,9 +1,9 @@
-import React from "react";
-import { Words } from "../components/Words";
-import { Text } from "react-native";
-import { ImageAndText } from "../components/ImageAndText";
+import React from 'react';
+import { ImageAndText } from '../components/ImageAndText';
+import { useBackHandler } from '@app/services/backHandler';
 
 const ImagesAndWords: React.ComponentType = () => {
+  useBackHandler();
   return <ImageAndText />;
 };
 

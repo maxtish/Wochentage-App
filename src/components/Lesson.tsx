@@ -1,7 +1,7 @@
 // App.tsx
-import React, { useState, useEffect } from "react";
-import { View, Text, Pressable, StyleSheet, ScrollView } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   initData,
   ratingIncrement,
@@ -9,14 +9,14 @@ import {
   addQueue,
   updateButtons,
   increment,
-} from "../store/actions/actions";
-import { stateCounts } from "../store/reducers/count";
-import { TBazaArrayItem, TData } from "../../constants";
-import { IButtonsState, IDataState } from "../store/reducers/data";
-import { useNavigate } from "react-router-native";
-import { stateLesson } from "../store/reducers/lesson";
-import { ButtonClose } from "./ButtonClose";
-import { stateImageAndText } from "../store/reducers/imageAndText";
+} from '../store/actions/actions';
+import { stateCounts } from '../store/reducers/count';
+import { TBazaArrayItem, TData } from '../../constants';
+import { IButtonsState, IDataState } from '../store/reducers/data';
+import { useNavigate } from 'react-router-native';
+import { stateLesson } from '../store/reducers/lesson';
+import { ButtonClose } from './ButtonClose';
+import { stateImageAndText } from '../store/reducers/imageAndText';
 
 export interface IState {
   stateCounts: stateCounts;
@@ -26,9 +26,9 @@ export interface IState {
 }
 
 export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
-  const defaultColorButton = "#B0C4DE";
-  const isGoodColorButton = "#008000";
-  const isBadColorButton = "#B22222";
+  const defaultColorButton = '#B0C4DE';
+  const isGoodColorButton = '#008000';
+  const isBadColorButton = '#B22222';
   const dispatch = useDispatch();
   type TButtonEntry = [string, string];
   const { count } = useSelector((state: IState) => state.stateCounts);
@@ -71,10 +71,7 @@ export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
 
   // Добавляем в очередь
   useEffect(() => {
-    if (
-      count === Object.values(stateQueue).length &&
-      Object.values(stateQueue).length > 0
-    ) {
+    if (count === Object.values(stateQueue).length && Object.values(stateQueue).length > 0) {
       // Преобразовать объект baza в массив пар ключ-значение
       const bazaArray: TBazaArrayItem = Object.entries(stateBaza);
       // Отсортировать массив по значению rating в порядке возрастания
@@ -87,10 +84,7 @@ export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
   }, [count, stateBaza]);
 
   const checkButton = (id: string) => {
-    const newColor =
-      stateButton[id] === stateBaza[queue].de
-        ? isGoodColorButton
-        : isBadColorButton;
+    const newColor = stateButton[id] === stateBaza[queue].de ? isGoodColorButton : isBadColorButton;
     if (stateButton[id] === stateBaza[queue].de) {
       // УГАДАЛ
       // Обновляем цвет кнопки
@@ -135,11 +129,7 @@ export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
   };
 
   const lessonButtons = lessonData.map((item: TData, index: number) => (
-    <LessonButton
-      key={index}
-      text={item.name}
-      onPress={() => dispatch(initData(item))}
-    />
+    <LessonButton key={index} text={item.name} onPress={() => dispatch(initData(item))} />
   ));
 
   return (
@@ -148,11 +138,7 @@ export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
         <View style={styles.headerClose}>
           <Text>Счетчик:{count}</Text>
 
-          {Object.keys(stateBaza).length > 0 ? (
-            <ButtonClose />
-          ) : (
-            <ButtonClose />
-          )}
+          {Object.keys(stateBaza).length > 0 ? <ButtonClose /> : <ButtonClose />}
         </View>
         <Text style={styles.headerLesson}>
           Урок: {lesson} {stateName}
@@ -165,9 +151,7 @@ export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
         </ScrollView>
       ) : (
         <View style={styles.wrapperMain}>
-          <Text style={styles.itemQueue}>
-            {stateBaza[stateQueue[count]]?.rus}
-          </Text>
+          <Text style={styles.itemQueue}>{stateBaza[stateQueue[count]]?.rus}</Text>
           <View style={styles.wrapperBottons}>
             {Object.keys(stateButton).map((id) => {
               return (
@@ -176,10 +160,7 @@ export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
                   onPress={() => {
                     checkButton(id);
                   }}
-                  style={[
-                    styles.buttons,
-                    { backgroundColor: colorButtons[id] || defaultColorButton },
-                  ]}
+                  style={[styles.buttons, { backgroundColor: colorButtons[id] || defaultColorButton }]}
                 >
                   <Text style={styles.buttonText}>{stateButton[id]}</Text>
                 </Pressable>
@@ -197,25 +178,25 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 10,
     flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-start",
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     gap: 10,
   },
   header: {
-    width: "100%",
-    flexDirection: "column",
+    width: '100%',
+    flexDirection: 'column',
   },
   headerClose: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
   },
 
   headerLesson: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 20,
-    fontWeight: "600",
+    fontWeight: '600',
   },
 
   textLoadLesson: {
@@ -226,33 +207,33 @@ const styles = StyleSheet.create({
   },
   lessonButton: {
     padding: 5,
-    backgroundColor: "#B0C4DE",
+    backgroundColor: '#B0C4DE',
     borderRadius: 5,
   },
   wrapperMain: {
     flex: 1,
-    justifyContent: "space-around",
+    justifyContent: 'space-around',
     paddingBottom: 20,
   },
   itemQueue: {
     marginBottom: 40,
     fontSize: 20,
-    textAlign: "center",
-    fontWeight: "600",
+    textAlign: 'center',
+    fontWeight: '600',
     padding: 5,
     borderRadius: 5,
-    backgroundColor: "#AFEEEE",
+    backgroundColor: '#AFEEEE',
     borderWidth: 2,
-    borderColor: "#4682B4",
+    borderColor: '#4682B4',
   },
   buttons: {
     padding: 5,
     borderRadius: 5,
-    alignItems: "center",
+    alignItems: 'center',
   },
   buttonText: {
     fontSize: 20,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   wrapperBottons: {
     gap: 10,

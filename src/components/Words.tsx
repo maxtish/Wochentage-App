@@ -1,20 +1,9 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  FlatList,
-  ScrollView,
-} from "react-native";
-import { roomItems, IWord, IWordsLesson } from "../../constants"; // Подключение ваших массивов
-import { useNavigate } from "react-router-native";
-import { ButtonGoBack } from "./ButtonGoBack";
-import { ButtonClose } from "./ButtonClose";
+import React, { useState } from 'react';
+import { View, Text, Pressable, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { IWord, IWordsLesson } from '../../constants'; // Подключение ваших массивов
+import { ButtonClose } from './ButtonClose';
 
-export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({
-  lessonWorlds,
-}) => {
+export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({ lessonWorlds }) => {
   const [visibleItemId, setVisibleItemId] = useState<string | null>(null);
   const [activeArray, setActiveArray] = useState(lessonWorlds[0].data);
   const [activeButton, setActiveButton] = useState(lessonWorlds[0].name); // Используем активную кнопку
@@ -35,10 +24,7 @@ export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({
           return (
             <Pressable
               key={index}
-              style={[
-                styles.button,
-                activeButton === item.name && styles.activeButton,
-              ]}
+              style={[styles.button, activeButton === item.name && styles.activeButton]}
               onPress={() => handleArrayChange(item.data, item.name)}
             >
               <Text style={styles.buttonText}>{item.name}</Text>
@@ -51,17 +37,13 @@ export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({
         data={activeArray}
         renderItem={({ item, index }) => (
           <View key={index}>
-            <Pressable
-              onPress={() => setVisibleItemId(item.rus)}
-              style={styles.row}
-            >
+            <Pressable onPress={() => setVisibleItemId(item.rus)} style={styles.row}>
               <Text style={styles.itemsRus}> {item.rus} - </Text>
               <Text
                 style={[
                   styles.itemsDe,
                   styles.ButtonItemsDe,
-                  visibleItemId === activeArray[index].rus &&
-                    styles.pressablePressed,
+                  visibleItemId === activeArray[index].rus && styles.pressablePressed,
                 ]}
               >
                 {item.de}
@@ -82,20 +64,20 @@ const styles = StyleSheet.create({
   },
   row: {
     paddingVertical: 5,
-    backgroundColor: "#FFE4B5",
+    backgroundColor: '#FFE4B5',
     marginTop: 10,
-    flexDirection: "row",
-    borderColor: "#BDB76B",
+    flexDirection: 'row',
+    borderColor: '#BDB76B',
     borderWidth: 1,
-    flexWrap: "wrap",
-    alignItems: "center",
+    flexWrap: 'wrap',
+    alignItems: 'center',
   },
   ButtonItemsDe: {
     opacity: 0,
     paddingLeft: 5,
   },
   itemsDe: {
-    fontWeight: "600",
+    fontWeight: '600',
     fontSize: 25,
   },
   itemsRus: {
@@ -108,8 +90,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: "#DCDCDC",
-    fontWeight: "600",
+    backgroundColor: '#DCDCDC',
+    fontWeight: '600',
     fontSize: 20,
     borderRadius: 5,
     marginRight: 5,
@@ -117,17 +99,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   activeButton: {
-    backgroundColor: "#888",
+    backgroundColor: '#888',
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   goBack: {
     margin: 20,
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     paddingHorizontal: 20,
   },
 });

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable, TextInput } from "react-native";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-native";
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Pressable, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-native';
 import {
   lessonDelayInit,
   lessonInit,
   lessonMenuOpen,
   lessonQuessInit,
   lessonWordsInit,
-} from "../store/actions/actions";
+} from '../store/actions/actions';
 import {
   Lesson1Quess,
   Lesson6Quess,
@@ -18,10 +18,11 @@ import {
   lesson6Words,
   lesson7Words,
   lesson8Words,
-} from "../../constants";
-import { IState } from "../components/Lesson";
-import { useSelector } from "react-redux";
-import { persistor } from "../store/store";
+} from '../../constants';
+import { IState } from '../components/Lesson';
+import { useSelector } from 'react-redux';
+import { persistor } from '../store/store';
+import { useBackHandler } from '@app/services/backHandler';
 
 const HomeScreen: React.ComponentType = () => {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ const HomeScreen: React.ComponentType = () => {
       // Очистка кэша
     });
   };
+
+  useBackHandler();
 
   const ToLesson = (name: string, numLesson: number) => {
     dispatch(lessonInit(numLesson));
@@ -57,10 +60,10 @@ const HomeScreen: React.ComponentType = () => {
       dispatch(lessonWordsInit(lesson8Words));
     }
 
-    navigate("/lesson", { state: { lesson: name } });
+    navigate('/lesson', { state: { lesson: name } });
   };
 
-  const [inputValue, setInputValue] = useState(""); // Состояние для хранения введенного значения
+  const [inputValue, setInputValue] = useState(''); // Состояние для хранения введенного значения
   const stateDelay = useSelector((state: IState) => state.stateLesson.delay);
 
   const handleInputChange = (time: string) => {
@@ -71,68 +74,53 @@ const HomeScreen: React.ComponentType = () => {
 
   const handleSubmit = () => {
     dispatch(lessonDelayInit(Number(inputValue)));
-    setInputValue("");
+    setInputValue('');
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Это главный экран</Text>
-      <Pressable
-        style={styles.buttonsNavi}
-        onPress={() => ToLesson("Урок 1", 1)}
-      >
-        <Text style={styles.buttonsText}>Урок 1</Text>
-        <Text style={styles.buttonsTextDescription}>Всякое разное</Text>
-      </Pressable>
-      <Pressable
-        style={styles.buttonsNavi}
-        onPress={() => ToLesson("Урок 6", 6)}
-      >
-        <Text style={styles.buttonsText}>Урок 6</Text>
-        <Text style={styles.buttonsTextDescription}>Модальные глаголы</Text>
-      </Pressable>
-      <Pressable
-        style={styles.buttonsNavi}
-        onPress={() => ToLesson("Урок 7", 7)}
-      >
-        <Text style={styles.buttonsText}>Урок 7</Text>
-        <Text style={styles.buttonsTextDescription}>
-          Притяжательные местоимения
-        </Text>
-      </Pressable>
-      <Pressable
-        style={styles.buttonsNavi}
-        onPress={() => ToLesson("Урок 8", 8)}
-      >
-        <Text style={styles.buttonsText}>Урок 8</Text>
-        <Text style={styles.buttonsTextDescription}>Вопросы</Text>
-      </Pressable>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <Text>Это главный экран</Text>
+        <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Урок 1', 1)}>
+          <Text style={styles.buttonsText}>Урок 1</Text>
+          <Text style={styles.buttonsTextDescription}>Всякое разное</Text>
+        </Pressable>
+        <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Урок 6', 6)}>
+          <Text style={styles.buttonsText}>Урок 6</Text>
+          <Text style={styles.buttonsTextDescription}>Модальные глаголы</Text>
+        </Pressable>
+        <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Урок 7', 7)}>
+          <Text style={styles.buttonsText}>Урок 7</Text>
+          <Text style={styles.buttonsTextDescription}>Притяжательные местоимения</Text>
+        </Pressable>
+        <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Урок 8', 8)}>
+          <Text style={styles.buttonsText}>Урок 8</Text>
+          <Text style={styles.buttonsTextDescription}>Вопросы</Text>
+        </Pressable>
 
-      <View>
-        <Text>Введите значение задержки:</Text>
-        <TextInput
-          style={styles.input}
-          inputMode="numeric"
-          value={`${inputValue}`}
-          onChangeText={handleInputChange}
-          placeholder={`Задержка: ${stateDelay} сек`}
-        />
-        <Pressable style={styles.buttonsNavi} onPress={handleSubmit}>
-          <Text>Отправить</Text>
+        <View>
+          <Text>Введите значение задержки:</Text>
+          <TextInput
+            style={styles.input}
+            inputMode="numeric"
+            value={`${inputValue}`}
+            onChangeText={handleInputChange}
+            placeholder={`Задержка: ${stateDelay} сек`}
+          />
+          <Pressable style={styles.buttonsNavi} onPress={handleSubmit}>
+            <Text>Отправить</Text>
+          </Pressable>
+        </View>
+
+        <Pressable style={styles.buttonsNavi} onPress={() => navigate('/imagesAndWords')}>
+          <Text style={styles.buttonsText}>Угадай картинку</Text>
+        </Pressable>
+
+        <Pressable style={styles.buttonClearCache} onPress={handleClearCache}>
+          <Text style={styles.buttonsText}>Очистить кэш</Text>
         </Pressable>
       </View>
-
-      <Pressable
-        style={styles.buttonsNavi}
-        onPress={() => navigate("/imagesAndWords")}
-      >
-        <Text style={styles.buttonsText}>Угадай картинку</Text>
-      </Pressable>
-
-      <Pressable style={styles.buttonClearCache} onPress={handleClearCache}>
-        <Text style={styles.buttonsText}>Очистить кэш</Text>
-      </Pressable>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -141,33 +129,33 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     flex: 1,
     gap: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
   buttonsNavi: {
-    width: "50%",
-    backgroundColor: "#20B2AA",
+    width: '50%',
+    backgroundColor: '#20B2AA',
     borderRadius: 5,
   },
 
   buttonClearCache: {
-    width: "50%",
-    backgroundColor: "red",
+    width: '50%',
+    backgroundColor: 'red',
     borderRadius: 5,
   },
 
   buttonsText: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 25,
   },
   buttonsTextDescription: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 15,
   },
 
   input: {
     width: 200,
     height: 40,
-    borderColor: "gray",
+    borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 10,
   },

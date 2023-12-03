@@ -1,6 +1,6 @@
 ///ФУНКЦИЯ БЕРЕТ ВСЕ СЛОВА И ВОЗРВЩАЕТ 3 СЛОВА ЗА ИСКЛЮЧЕНИЕМ ОДНОГО ЧТОБЫ НЕ ДУБЛИРОВАТЬ
 
-import { iconAssets } from "./iconAssets";
+import { iconAssets } from './iconAssets';
 
 // Определите тип для слов
 type Word = string;

@@ -1,12 +1,12 @@
-import React from "react";
-import { AppRegistry } from "react-native";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./src/store/store"; // Импортируйте store и persistor из store.ts
-import { NativeRouter, Route, Routes } from "react-router-native";
-import HomeScreen from "./src/screens/HomeScreen";
-import LessonScreen from "./src/screens/LessonScreen";
-import ImagesAndWords from "./src/screens/ImagesAndWords";
+import React, { useEffect } from 'react';
+import { AppRegistry, BackHandler } from 'react-native';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './src/store/store'; // Импортируйте store и persistor из store.ts
+import { NativeRouter, Route, Routes } from 'react-router-native';
+import HomeScreen from './src/screens/HomeScreen';
+import LessonScreen from './src/screens/LessonScreen';
+import ImagesAndWords from './src/screens/ImagesAndWords';
 
 const App = () => {
   return (
@@ -24,5 +24,5 @@ const App = () => {
   );
 };
 
-AppRegistry.registerComponent("Dawai-Dawai", () => App);
+AppRegistry.registerComponent('Dawai-Dawai', () => App);
 export default App;
