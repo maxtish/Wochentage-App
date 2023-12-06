@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, Text, Pressable, StyleSheet, FlatList, ScrollView, StatusBar } from 'react-native';
 import { IWord, IWordsLesson } from '../../constants'; // Подключение ваших массивов
 import { ButtonClose } from './ButtonClose';
 
@@ -60,7 +60,32 @@ export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({ lessonWorlds
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
+  },
+  buttonContainer: {
+    marginBottom: 10,
+  },
+
+  button: {
+    backgroundColor: '#DCDCDC',
+    fontWeight: '600',
+    borderRadius: 5,
+    marginRight: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  activeButton: {
+    backgroundColor: '#888',
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  goBack: {
+    margin: 20,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingHorizontal: 20,
   },
   row: {
     paddingVertical: 5,
@@ -85,31 +110,5 @@ const styles = StyleSheet.create({
   },
   pressablePressed: {
     opacity: 1,
-  },
-  buttonContainer: {
-    marginBottom: 10,
-  },
-  button: {
-    backgroundColor: '#DCDCDC',
-    fontWeight: '600',
-    fontSize: 20,
-    borderRadius: 5,
-    marginRight: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-  },
-  activeButton: {
-    backgroundColor: '#888',
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  goBack: {
-    margin: 20,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    paddingHorizontal: 20,
   },
 });
