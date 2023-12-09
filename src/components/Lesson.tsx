@@ -17,13 +17,7 @@ import { useNavigate } from 'react-router-native';
 import { stateLesson } from '../store/reducers/lesson';
 import { ButtonClose } from './ButtonClose';
 import { stateImageAndText } from '../store/reducers/imageAndText';
-
-export interface IState {
-  stateCounts: stateCounts;
-  stateData: IDataState;
-  stateLesson: stateLesson;
-  stateImageAndText: stateImageAndText;
-}
+import { IState } from '../store/store';
 
 export const Lesson: React.FC<{ lessonData: TData[] }> = ({ lessonData }) => {
   const defaultColorButton = '#B0C4DE';

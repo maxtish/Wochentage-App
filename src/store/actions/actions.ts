@@ -91,7 +91,7 @@ export const allWordsResetCount = () => ({
   type: 'ALL_WORDS_RESET_COUNT' as const,
 });
 /// numberSpeakReducer
-export const allNumberInit = (allNumber: string[]) => ({
+export const allNumberInit = (allNumber: number[]) => ({
   type: 'ALL_NUMBER_INIT' as const,
   allNumber,
 });

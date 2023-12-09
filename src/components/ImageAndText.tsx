@@ -2,13 +2,14 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { View, StyleSheet, Text, Pressable, Image } from 'react-native';
 import { selectWords, shuffleWords } from '../../service';
-import { IState } from './Lesson';
+
 import { useDispatch } from 'react-redux';
 import { allWordsIncrement, allWordsInit, allWordsResetCount } from '../store/actions/actions';
 import { ButtonGoBack } from './ButtonGoBack';
 import { iconAssets } from '../../iconAssets';
 import { ImageGen } from './ImageGen';
 import * as Progress from 'react-native-progress';
+import { IState } from '../store/store';
 
 export const ImageAndText: React.FC = () => {
   const stateDelay = useSelector((state: IState) => state.stateLesson.delay);

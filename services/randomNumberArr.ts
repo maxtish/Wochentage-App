@@ -1,4 +1,4 @@
-export const randomNumberArr = () => {
+export const randomNumberArr = (): number[] => {
   let randomNumbersArr: number[] = [];
 
   const generateNumbersInInterval = (arr: number[], min: number, max: number, count: number) => {

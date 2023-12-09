@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Pressable, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Vibration,
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-native';
 import {
@@ -19,9 +28,9 @@ import {
   lesson7Words,
   lesson8Words,
 } from '../../constants';
-import { IState } from '../components/Lesson';
+
 import { useSelector } from 'react-redux';
-import { persistor } from '../store/store';
+import { IState, persistor } from '../store/store';
 import { useBackHandler } from '@app/services/backHandler';
 
 const HomeScreen: React.ComponentType = () => {
