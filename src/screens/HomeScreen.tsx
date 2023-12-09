@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  TextInput,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Vibration,
-} from 'react-native';
+import { View, Text, StyleSheet, Pressable, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-native';
 import {
@@ -152,7 +143,7 @@ const styles = StyleSheet.create({
 
   buttonClearCache: {
     width: '50%',
-    backgroundColor: 'red',
+    backgroundColor: '#CCC',
     borderRadius: 5,
   },
 

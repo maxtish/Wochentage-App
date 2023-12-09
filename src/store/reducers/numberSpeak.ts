@@ -15,7 +15,7 @@ const initialState: stateNumberSpeak = {
 const numberSpeakReducer = (state: stateNumberSpeak = initialState, action: ActionTypes) => {
   switch (action.type) {
     case 'ALL_NUMBER_INIT':
-      return { ...state, allWords: action.allNumber };
+      return { ...state, allNumber: action.allNumber, count: 0 };
 
     case 'ALL_NUMBER_INCREMENT': {
       if (state.count + 1 === state.allNumber.length) {
