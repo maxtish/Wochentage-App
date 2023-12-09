@@ -19,52 +19,55 @@ export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({ lessonWorlds
       <View style={styles.goBack}>
         <ButtonClose />
       </View>
-      <ScrollView horizontal={true} style={styles.buttonContainer}>
-        {lessonWorlds.map((item, index) => {
-          return (
-            <Pressable
-              key={index}
-              style={[styles.button, activeButton === item.name && styles.activeButton]}
-              onPress={() => handleArrayChange(item.data, item.name)}
-            >
-              <Text style={styles.buttonText}>{item.name}</Text>
-            </Pressable>
-          );
-        })}
-      </ScrollView>
-
-      <FlatList
-        data={activeArray}
-        renderItem={({ item, index }) => (
-          <View key={index}>
-            <Pressable onPress={() => setVisibleItemId(item.rus)} style={styles.row}>
-              <Text style={styles.itemsRus}> {item.rus} - </Text>
-              <Text
-                style={[
-                  styles.itemsDe,
-                  styles.ButtonItemsDe,
-                  visibleItemId === activeArray[index].rus && styles.pressablePressed,
-                ]}
+      <View style={styles.buttonContainer}>
+        <ScrollView horizontal={true}>
+          {lessonWorlds.map((item, index) => {
+            return (
+              <Pressable
+                key={index}
+                style={[styles.button, activeButton === item.name && styles.activeButton]}
+                onPress={() => handleArrayChange(item.data, item.name)}
               >
-                {item.de}
-              </Text>
-            </Pressable>
-          </View>
-        )}
-        keyExtractor={(_, index) => index.toString()}
-      />
+                <Text style={styles.buttonText}>{item.name}</Text>
+              </Pressable>
+            );
+          })}
+        </ScrollView>
+      </View>
+      <View style={styles.buttonTexContainer}>
+        <FlatList
+          data={activeArray}
+          renderItem={({ item, index }) => (
+            <View key={index}>
+              <Pressable onPress={() => setVisibleItemId(item.rus)} style={styles.row}>
+                <Text style={styles.itemsRus}> {item.rus} - </Text>
+                <Text
+                  style={[
+                    styles.itemsDe,
+                    styles.ButtonItemsDe,
+                    visibleItemId === activeArray[index].rus && styles.pressablePressed,
+                  ]}
+                >
+                  {item.de}
+                </Text>
+              </Pressable>
+            </View>
+          )}
+          keyExtractor={(_, index) => index.toString()}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0,
   },
   buttonContainer: {
     marginBottom: 10,
   },
-
+  buttonTexContainer: {},
   button: {
     backgroundColor: '#DCDCDC',
     fontWeight: '600',
@@ -73,6 +76,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
+
   activeButton: {
     backgroundColor: '#888',
   },
@@ -97,6 +101,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
   },
+
   ButtonItemsDe: {
     opacity: 0,
     paddingLeft: 5,
