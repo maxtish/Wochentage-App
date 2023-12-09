@@ -24,11 +24,13 @@ const LessonScreen: React.ComponentType = () => {
     setSelectLesson(select);
   };
 
-  // при открытии компонента очищать state
+  // при закрытии компонента очищать state
   useEffect(() => {
-    dispatch(delAll());
-    dispatch(resetCount());
-    dispatch(lessonMenuOpen());
+    return () => {
+      dispatch(delAll());
+      dispatch(resetCount());
+      dispatch(lessonMenuOpen());
+    };
   }, []);
 
   useBackHandler();
