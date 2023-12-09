@@ -116,6 +116,10 @@ const HomeScreen: React.ComponentType = () => {
           <Text style={styles.buttonsText}>Угадай картинку</Text>
         </Pressable>
 
+        <Pressable style={styles.buttonsNavi} onPress={() => navigate('/NumberSpeak')}>
+          <Text style={styles.buttonsText}>Числа на слух</Text>
+        </Pressable>
+
         <Pressable style={styles.buttonClearCache} onPress={handleClearCache}>
           <Text style={styles.buttonsText}>Очистить кэш</Text>
         </Pressable>
