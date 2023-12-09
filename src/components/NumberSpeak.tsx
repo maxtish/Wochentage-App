@@ -6,31 +6,22 @@ import { allWordsIncrement, allWordsInit, allWordsResetCount } from '../store/ac
 import { iconAssets } from '../../iconAssets';
 import * as Progress from 'react-native-progress';
 import * as Speech from 'expo-speech';
+import { randomNumberArr } from '@app/services/randomNumberArr';
 
 export const NumberSpeak: React.FC = () => {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleInputChange = (time: string) => {
-    if (!isNaN(Number(time))) {
-      setInputValue(time); // Обновление состояния при вводе текста, если введено число
-    }
-  };
-
   const speakText = (text: string) => {
     Speech.speak(text, { language: 'de' });
   };
 
+  const arr = randomNumberArr();
+
+  console.log('arr', arr);
+
   return (
     <View>
       <Text>Введите значение задержки:</Text>
-      <TextInput
-        style={styles.input}
-        inputMode="numeric"
-        value={`${inputValue}`}
-        onChangeText={handleInputChange}
-        placeholder={`s`}
-      />
-      <Pressable style={styles.buttonsNavi} onPress={() => speakText(inputValue)}>
+
+      <Pressable style={styles.buttonsNavi} onPress={() => {}}>
         <Text>Отправить</Text>
       </Pressable>
     </View>
