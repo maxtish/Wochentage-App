@@ -7,6 +7,7 @@ import { NativeRouter, Route, Routes } from 'react-router-native';
 import HomeScreen from './src/screens/HomeScreen';
 import LessonScreen from './src/screens/LessonScreen';
 import ImagesAndWords from './src/screens/ImagesAndWords';
+import NumberSpeakScreen from './src/screens/NumberSpeakScreen';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
               <Route path="/" Component={HomeScreen} />
               <Route path="/lesson" Component={LessonScreen} />
               <Route path="/imagesAndWords" Component={ImagesAndWords} />
+              <Route path="/homeScreen" Component={NumberSpeakScreen} />
             </Routes>
           </NativeRouter>
         </View>

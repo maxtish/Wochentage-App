@@ -116,7 +116,7 @@ const HomeScreen: React.ComponentType = () => {
           <Text style={styles.buttonsText}>Угадай картинку</Text>
         </Pressable>
 
-        <Pressable style={styles.buttonsNavi} onPress={() => navigate('/NumberSpeak')}>
+        <Pressable style={styles.buttonsNavi} onPress={() => navigate('/homeScreen')}>
           <Text style={styles.buttonsText}>Числа на слух</Text>
         </Pressable>
 
