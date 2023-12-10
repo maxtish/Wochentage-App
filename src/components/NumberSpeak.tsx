@@ -25,10 +25,15 @@ export const NumberSpeak: React.FC = () => {
   const correctNubmer = state.allNumber[state.count];
   const nummberf: string = correctNubmer !== undefined ? correctNubmer.toString() : 'Wird geladen';
   console.log(correctNubmer);
+  const [buttonPressed, setButtonPressed] = useState(false); // Add this line
 
   const speak = useMemo(() => {
     return speakText(
-      state.count === state.allNumber.length && state.allNumber[1] !== undefined ? 'Du hast gewonnen' : nummberf
+      state.count === state.allNumber.length && state.allNumber[1] !== undefined ? 'Du hast gewonnen' : nummberf,
+      (isSpoken) => {
+        console.log('Текст произнесен:');
+        setButtonPressed(isSpoken);
+      }
     );
   }, [state.count, nummberf]);
 
@@ -94,7 +99,7 @@ export const NumberSpeak: React.FC = () => {
           <View style={styles.containerCountdownTimer}>
             <CountdownTimer
               key={`${state.count}${nummberf}`}
-              duration={15}
+              duration={state.count < 5 ? 10 : state.count < 25 ? 15 : state.count < 45 ? 30 : 40}
               onStop={handleStopCountdown}
             ></CountdownTimer>
           </View>
@@ -109,6 +114,7 @@ export const NumberSpeak: React.FC = () => {
             <CustomNumericKeyboard
               onNumberPress={handleNumberPress}
               onFinishPress={handleFinishPress}
+              isTextSpoken={buttonPressed}
             ></CustomNumericKeyboard>
           </View>
         </>

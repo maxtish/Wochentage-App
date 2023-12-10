@@ -4,11 +4,16 @@ import { View, Text, TextInput, Pressable, StyleSheet, Vibration } from 'react-n
 interface CustomNumericKeyboardProps {
   onNumberPress?: (number: string) => void;
   onFinishPress?: (enteredNumber: string) => void;
+  isTextSpoken?: boolean;
 }
 
-export const CustomNumericKeyboard: FC<CustomNumericKeyboardProps> = ({ onNumberPress, onFinishPress }) => {
+export const CustomNumericKeyboard: FC<CustomNumericKeyboardProps> = ({
+  onNumberPress,
+  onFinishPress,
+  isTextSpoken,
+}) => {
   const [enteredNumber, setEnteredNumber] = useState('');
-
+  console.log('isTextSpoken', isTextSpoken);
   const handleNumberPress = (number: string) => {
     Vibration.vibrate([0, 20]); //  (пауза после клика, время вибраци, )
     setEnteredNumber(enteredNumber + number);
@@ -108,7 +113,12 @@ export const CustomNumericKeyboard: FC<CustomNumericKeyboardProps> = ({ onNumber
           </Pressable>
           <Pressable
             onPress={handleFinishPress}
-            style={({ pressed }) => [styles.finishButton, pressed && styles.buttonPressed]}
+            disabled={!isTextSpoken}
+            style={({ pressed }) => [
+              styles.finishButton,
+              pressed && styles.buttonPressed,
+              !isTextSpoken && styles.finishButtonDisabled, // Стиль для неактивного состояния
+            ]}
           >
             <Text style={styles.buttonText}>Готово</Text>
           </Pressable>
@@ -158,6 +168,9 @@ const styles = StyleSheet.create({
     padding: 15,
     margin: 5,
     borderRadius: 5,
+  },
+  finishButtonDisabled: {
+    backgroundColor: '#CCCCCC',
   },
   buttonText: {
     color: '#ffffff',
