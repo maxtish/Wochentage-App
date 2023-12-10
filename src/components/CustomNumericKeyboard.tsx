@@ -1,10 +1,13 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, useEffect } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet, Vibration } from 'react-native';
+import { IState } from '../store/store';
+import { useSelector } from 'react-redux';
 
 interface CustomNumericKeyboardProps {
   onNumberPress?: (number: string) => void;
   onFinishPress?: (enteredNumber: string) => void;
   isTextSpoken?: boolean;
+  onNumberChange?: (enteredNumber: string) => void;
 }
 
 export const CustomNumericKeyboard: FC<CustomNumericKeyboardProps> = ({
@@ -17,8 +20,14 @@ export const CustomNumericKeyboard: FC<CustomNumericKeyboardProps> = ({
   const handleNumberPress = (number: string) => {
     Vibration.vibrate([0, 20]); //  (пауза после клика, время вибраци, )
     setEnteredNumber(enteredNumber + number);
-    onNumberPress && onNumberPress(number);
+    onNumberPress && onNumberPress(enteredNumber + number);
   };
+
+  const state = useSelector((state: IState) => state.stateNumberSpeak);
+
+  useEffect(() => {
+    setEnteredNumber('');
+  }, [state.count]);
 
   const handleNumberDel = () => {
     Vibration.vibrate([0, 20]);

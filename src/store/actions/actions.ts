@@ -107,6 +107,11 @@ export const allNumbersResetCount = () => ({
   type: 'ALL_NUMBER_RESET_COUNT' as const,
 });
 
+export const allNumberInitAndDecrement = (allNumber: number[]) => ({
+  type: 'ALL_NUMBER_INIT_AND_DECREMENT' as const,
+  allNumber,
+});
+
 export type ActionTypes = ReturnType<
   | typeof increment
   | typeof decrement
@@ -132,4 +137,5 @@ export type ActionTypes = ReturnType<
   | typeof allNumberIncrement
   | typeof allNumbersDecrement
   | typeof allNumbersResetCount
+  | typeof allNumberInitAndDecrement
 >;

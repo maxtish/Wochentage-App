@@ -2,7 +2,13 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { View, StyleSheet, Text, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { allNumberIncrement, allNumberInit } from '../store/actions/actions';
+import {
+  allNumberIncrement,
+  allNumberInit,
+  allNumberInitAndDecrement,
+  allNumbersDecrement,
+  allNumbersResetCount,
+} from '../store/actions/actions';
 import { randomNumberArr } from '@app/services/randomNumberArr';
 import { IState } from '../store/store';
 import { CustomNumericKeyboard } from './CustomNumericKeyboard';
@@ -13,12 +19,16 @@ export const NumberSpeak: React.FC = () => {
   const state = useSelector((state: IState) => state.stateNumberSpeak);
   const [yes, setYes] = useState<boolean>();
   const [no, setNo] = useState<boolean>();
+
+  const [enteredNumbers, setEnteredNumbers] = useState('');
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (correctNubmer === undefined) {
       console.log(correctNubmer);
       dispatch(allNumberInit(randomNumberArr()));
+      dispatch(allNumbersResetCount());
     }
   }, []);
 
@@ -35,10 +45,12 @@ export const NumberSpeak: React.FC = () => {
         setButtonPressed(isSpoken);
       }
     );
-  }, [state.count, nummberf]);
+  }, [nummberf]);
 
   const handleNumberPress = (number: string) => {
     // Обработка введенной цифры
+    console.log(number);
+    setEnteredNumbers(number);
   };
 
   const handleFinishPress = (enteredNumber: string) => {
@@ -59,8 +71,7 @@ export const NumberSpeak: React.FC = () => {
       setNo(true);
       setTimeout(() => {
         //код, который должен выполниться после задержки
-
-        dispatch(allNumberInit(randomNumberArr()));
+        dispatch(allNumberInitAndDecrement(randomNumberArr()));
         setNo(false);
       }, 3000);
     }
@@ -68,7 +79,7 @@ export const NumberSpeak: React.FC = () => {
   const handleStopCountdown = () => {
     // Обработка события "стоп отсчет" здесь
     console.log('Отсчет завершен!');
-    dispatch(allNumberInit(randomNumberArr()));
+    handleFinishPress(enteredNumbers);
   };
   return (
     <View style={styles.container}>

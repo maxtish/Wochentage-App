@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { useSelector } from 'react-redux';
+import { IState } from '../store/store';
 
 interface ICountdownTimer {
   duration: number;
@@ -10,6 +12,8 @@ interface ICountdownTimer {
 export const CountdownTimer = ({ duration, onStop }: ICountdownTimer) => {
   const [isActive, setIsActive] = useState(true);
   const [remainingTime, setRemainingTime] = useState<number>(duration);
+  const state = useSelector((state: IState) => state.stateNumberSpeak);
+
   useEffect(() => {
     let interval: any;
     if (isActive && remainingTime > 0) {
@@ -22,7 +26,7 @@ export const CountdownTimer = ({ duration, onStop }: ICountdownTimer) => {
     }
 
     return () => clearInterval(interval);
-  }, [isActive, remainingTime, onStop]);
+  }, [remainingTime, state.count]);
 
   const handleComplete = () => {
     setIsActive(false);
