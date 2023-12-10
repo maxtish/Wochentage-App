@@ -1,16 +1,14 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { View, StyleSheet, Text, Pressable, TextInput } from 'react-native';
+import { View, StyleSheet, Text, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { allNumberIncrement, allNumberInit } from '../store/actions/actions';
-import { iconAssets } from '../../iconAssets';
-
-import * as Speech from 'expo-speech';
 import { randomNumberArr } from '@app/services/randomNumberArr';
 import { IState } from '../store/store';
 import { CustomNumericKeyboard } from './CustomNumericKeyboard';
 import { speakText } from '@app/services/speakText';
 import * as Progress from 'react-native-progress';
+import { CountdownTimer } from './CountdownTimer';
 export const NumberSpeak: React.FC = () => {
   const state = useSelector((state: IState) => state.stateNumberSpeak);
   const [yes, setYes] = useState<boolean>();
@@ -25,7 +23,7 @@ export const NumberSpeak: React.FC = () => {
   }, []);
 
   const correctNubmer = state.allNumber[state.count];
-  const nummberf: string = correctNubmer !== undefined ? correctNubmer.toString() : '-0';
+  const nummberf: string = correctNubmer !== undefined ? correctNubmer.toString() : 'Du hast wahrscheinlich gewonnen';
   console.log(correctNubmer);
 
   const speak = useMemo(() => {
@@ -60,26 +58,59 @@ export const NumberSpeak: React.FC = () => {
       }, 1000);
     }
   };
-
+  const handleStopCountdown = () => {
+    // Обработка события "стоп отсчет" здесь
+    console.log('Отсчет завершен!');
+    dispatch(allNumberInit(randomNumberArr()));
+  };
   return (
     <View style={styles.container}>
-      <Text>{state.count}</Text>
-      <Progress.Bar
-        style={styles.progress}
-        progress={(state.count + 1) / state.allNumber.length}
-        width={200}
-        height={20}
-        borderRadius={50}
-      />
-
-      {yes ? <Text style={styles.resultJa}> {nummberf}</Text> : <Text style={styles.resultJa}> </Text>}
-      {no ? <Text style={styles.resultNein}>{nummberf}</Text> : <Text style={styles.resultNein}> </Text>}
-      <View style={styles.containerKeyboard}>
-        <CustomNumericKeyboard
-          onNumberPress={handleNumberPress}
-          onFinishPress={handleFinishPress}
-        ></CustomNumericKeyboard>
-      </View>
+      {state.count === state.allNumber.length ? (
+        <>
+          <Text style={styles.textWin}>
+            Sehr gut! Mit den Zahlen haben wir uns jetzt auseinandergesetzt, jetzt bleibt noch, 6000 Wörter für das
+            Niveau C1 zu lernen.
+          </Text>
+          <Pressable
+            style={styles.StarthButton}
+            onPress={() => {
+              dispatch(allNumberInit(randomNumberArr()));
+            }}
+          >
+            <Text>Начать заново</Text>
+          </Pressable>
+        </>
+      ) : (
+        <>
+          <Progress.Bar
+            style={styles.progress}
+            progress={(state.count + 1) / state.allNumber.length}
+            width={200}
+            height={20}
+            borderRadius={50}
+          />
+          <View style={styles.containerCountdownTimer}>
+            <CountdownTimer
+              key={`${state.count}${nummberf}`}
+              duration={10}
+              onStop={handleStopCountdown}
+            ></CountdownTimer>
+          </View>
+          <View style={styles.containerCorrectNubmer}>
+            {yes || no ? (
+              <Text style={yes ? styles.resultJa : styles.resultNein}>{nummberf}</Text>
+            ) : (
+              <Text style={styles.resultJa}> </Text>
+            )}
+          </View>
+          <View style={styles.containerKeyboard}>
+            <CustomNumericKeyboard
+              onNumberPress={handleNumberPress}
+              onFinishPress={handleFinishPress}
+            ></CustomNumericKeyboard>
+          </View>
+        </>
+      )}
     </View>
   );
 };
@@ -90,21 +121,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  StarthButton: {
+    backgroundColor: '#2ecc71',
+    padding: 15,
+    margin: 5,
+    borderRadius: 5,
+  },
+  textWin: {
+    padding: 20,
+    color: '#2ecc71',
+    fontSize: 20,
+  },
+  containerCorrectNubmer: {},
   containerKeyboard: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  containerCountdownTimer: {},
   progress: {
     marginVertical: 20,
   },
   resultJa: {
-    color: 'green',
+    color: '#2ecc71',
     fontSize: 50,
+    fontWeight: '900',
   },
   resultNein: {
     color: 'red',
     fontSize: 50,
+    fontWeight: '900',
   },
   input: {
     width: 200,

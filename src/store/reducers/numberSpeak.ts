@@ -18,7 +18,7 @@ const numberSpeakReducer = (state: stateNumberSpeak = initialState, action: Acti
       return { ...state, allNumber: action.allNumber, count: 0 };
 
     case 'ALL_NUMBER_INCREMENT': {
-      if (state.count + 1 === state.allNumber.length) {
+      if (state.count === state.allNumber.length) {
         console.log('Закончили');
         return { ...state, count: state.count };
       } else {
