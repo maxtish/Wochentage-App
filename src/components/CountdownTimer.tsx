@@ -35,8 +35,8 @@ export const CountdownTimer = ({ duration, onStop }: ICountdownTimer) => {
         size={100}
         isPlaying
         duration={duration}
-        colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-        colorsTime={[7, 5, 2, 0]}
+        colors={['#2ecc71', '#F7B801', '#A30000', '#A30000']}
+        colorsTime={[10, 5, 2, 0]}
         onComplete={handleComplete} // Добавляем onComplete, чтобы обработать завершение таймера
       >
         {({ remainingTime }) => <Text style={styles.timerText}>{remainingTime}</Text>}

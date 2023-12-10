@@ -23,11 +23,13 @@ export const NumberSpeak: React.FC = () => {
   }, []);
 
   const correctNubmer = state.allNumber[state.count];
-  const nummberf: string = correctNubmer !== undefined ? correctNubmer.toString() : 'Du hast wahrscheinlich gewonnen';
+  const nummberf: string = correctNubmer !== undefined ? correctNubmer.toString() : 'Wird geladen';
   console.log(correctNubmer);
 
   const speak = useMemo(() => {
-    return speakText(nummberf);
+    return speakText(
+      state.count === state.allNumber.length && state.allNumber[1] !== undefined ? 'Du hast gewonnen' : nummberf
+    );
   }, [state.count, nummberf]);
 
   const handleNumberPress = (number: string) => {
@@ -55,7 +57,7 @@ export const NumberSpeak: React.FC = () => {
 
         dispatch(allNumberInit(randomNumberArr()));
         setNo(false);
-      }, 1000);
+      }, 3000);
     }
   };
   const handleStopCountdown = () => {
@@ -92,7 +94,7 @@ export const NumberSpeak: React.FC = () => {
           <View style={styles.containerCountdownTimer}>
             <CountdownTimer
               key={`${state.count}${nummberf}`}
-              duration={10}
+              duration={15}
               onStop={handleStopCountdown}
             ></CountdownTimer>
           </View>

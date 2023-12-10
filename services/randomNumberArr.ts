@@ -21,7 +21,5 @@ export const randomNumberArr = (): number[] => {
   // Генерация 20 случайных чисел от 1000 до 1000000
   randomNumbersArr = generateNumbersInInterval(randomNumbersArr, 1000, 1000000, 20);
 
-  // Пример использования
-
   return randomNumbersArr;
 };
