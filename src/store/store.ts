@@ -1,10 +1,7 @@
 // store.ts
 
 import { createStore, combineReducers } from 'redux';
-import { persistStore, persistReducer } from 'redux-persist';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import countReducer, { stateCounts } from './reducers/count'; // Импортируйте редюсер
-import { Persistor } from 'redux-persist/es/types';
 import dataReducer, { IDataState } from './reducers/data';
 import lessonReducer, { stateLesson } from './reducers/lesson';
 import imageAndTextReducer, { stateImageAndText } from './reducers/imageAndText';
@@ -27,14 +24,6 @@ export interface IState {
   stateNumberSpeak: stateNumberSpeak;
 }
 
-const persistConfig = {
-  key: 'root',
-  storage: AsyncStorage,
-};
+const store = createStore(rootReducer);
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const store = createStore(persistedReducer);
-const persistor: Persistor = persistStore(store);
-
-export { store, persistor };
+export { store };
