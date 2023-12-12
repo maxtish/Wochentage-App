@@ -1,10 +1,21 @@
 export const randomNumberArr = (): number[] => {
   let randomNumbersArr: number[] = [];
 
+  // создаем массив случайных чисел в заданном интервале и определенном количестве,
+  // при условии, что числа уникальны в пределах массива arr.
   const generateNumbersInInterval = (arr: number[], min: number, max: number, count: number) => {
     for (let i = 0; i < count; i++) {
       const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-      arr.push(randomNumber);
+      let isUnique = true;
+      for (let j = 0; j < arr.length; j++) {
+        if (arr[j] === randomNumber) {
+          isUnique = false;
+          break;
+        }
+      }
+      if (isUnique) {
+        arr.push(randomNumber);
+      }
     }
     return arr;
   };
