@@ -6,7 +6,6 @@ import {
   allNumberIncrement,
   allNumberInit,
   allNumberInitAndDecrement,
-  allNumbersDecrement,
   allNumbersResetCount,
 } from '../store/actions/actions';
 import { randomNumberArr } from '@app/services/randomNumberArr';
