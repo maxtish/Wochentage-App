@@ -5,6 +5,7 @@ type SpeakCallback = (isSpoken: boolean) => void;
 export const speakText = async (text: string, callback: SpeakCallback): Promise<void> => {
   try {
     await Speech.speak(text, {
+      language: 'de', // для немецкого
       onDone: () => {
         callback(true); // вызывается, когда произношение завершено успешно
       },
