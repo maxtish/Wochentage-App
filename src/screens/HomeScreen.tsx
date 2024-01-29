@@ -16,6 +16,7 @@ import {
   lessonInit,
   lessonMenuOpen,
   lessonQuessInit,
+  lessonReset,
   lessonWordsInit,
 } from '../store/actions/actions';
 import {
@@ -27,6 +28,7 @@ import {
   lesson6Words,
   lesson7Words,
   lesson8Words,
+  lessonA1Words,
 } from '../../constants';
 
 import { useSelector } from 'react-redux';
@@ -61,6 +63,10 @@ const HomeScreen: React.ComponentType = () => {
     if (numLesson === 8) {
       dispatch(lessonQuessInit(Lesson8Quess));
       dispatch(lessonWordsInit(lesson8Words));
+    }
+    if (numLesson === 9) {
+      dispatch(lessonReset());
+      dispatch(lessonWordsInit(lessonA1Words));
     }
 
     navigate('/lesson', { state: { lesson: name } });
@@ -99,6 +105,10 @@ const HomeScreen: React.ComponentType = () => {
           <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Урок 8', 8)}>
             <Text style={styles.buttonsText}>Урок 8</Text>
             <Text style={styles.buttonsTextDescription}>Вопросы</Text>
+          </Pressable>
+          <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Слова для А1', 9)}>
+            <Text style={styles.buttonsText}>Слова для А1</Text>
+            <Text style={styles.buttonsTextDescription}>для А1</Text>
           </Pressable>
 
           <View>

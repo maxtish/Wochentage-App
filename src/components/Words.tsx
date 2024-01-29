@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Pressable, StyleSheet, FlatList, ScrollView, StatusBar } from 'react-native';
 import { IWord, IWordsLesson } from '../../constants'; // Подключение ваших массивов
 import { ButtonClose } from './ButtonClose';
+import { speakText } from '@app/services/speakText';
 
 export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({ lessonWorlds }) => {
   const [visibleItemId, setVisibleItemId] = useState<string | null>(null);
@@ -13,6 +14,7 @@ export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({ lessonWorlds
     setActiveButton(buttonName);
     setVisibleItemId(null);
   };
+  const [buttonPressed, setButtonPressed] = useState(false); // Add this line
 
   return (
     <View style={styles.container}>
@@ -39,7 +41,16 @@ export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({ lessonWorlds
           data={activeArray}
           renderItem={({ item, index }) => (
             <View key={index}>
-              <Pressable onPress={() => setVisibleItemId(item.rus)} style={styles.row}>
+              <Pressable
+                onPress={() => {
+                  setVisibleItemId(item.rus);
+                  speakText(item.de, (isSpoken) => {
+                    console.log('Текст произнесен:');
+                    setButtonPressed(isSpoken);
+                  });
+                }}
+                style={styles.row}
+              >
                 <Text style={styles.itemsRus}> {item.rus} - </Text>
                 <Text
                   style={[

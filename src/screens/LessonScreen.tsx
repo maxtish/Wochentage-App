@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IState, Lesson } from '../components/Lesson';
+import { Lesson } from '../components/Lesson';
 import { Pressable, Text, StyleSheet, View } from 'react-native';
 import { delAll, lessonMenuOpen, resetCount } from '../store/actions/actions';
 import { useDispatch } from 'react-redux';
@@ -9,6 +9,7 @@ import { useLocation, useParams } from 'react-router-native';
 import { useSelector } from 'react-redux';
 import { ButtonGoBack } from '../components/ButtonGoBack';
 import { useBackHandler } from '@app/services/backHandler';
+import { IState } from '../store/store';
 
 const LessonScreen: React.ComponentType = () => {
   //определяем какой урок открыть
@@ -38,9 +39,13 @@ const LessonScreen: React.ComponentType = () => {
       {menu ? (
         <View style={styles.container}>
           <Text>{location.state.lesson}</Text>
-          <Pressable style={styles.buttonsNavi} onPress={() => selectionLesson('guess')}>
-            <Text style={styles.buttonsText}>Отгадать</Text>
-          </Pressable>
+          {guess.length > 0 ? (
+            <Pressable style={styles.buttonsNavi} onPress={() => selectionLesson('guess')}>
+              <Text style={styles.buttonsText}>Отгадать</Text>
+            </Pressable>
+          ) : (
+            ''
+          )}
           <Pressable style={styles.buttonsNavi} onPress={() => selectionLesson('words')}>
             <Text style={styles.buttonsText}>Слова / фразы</Text>
           </Pressable>
