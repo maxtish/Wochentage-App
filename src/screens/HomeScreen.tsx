@@ -14,10 +14,12 @@ import {
   Lesson6Quess,
   Lesson7Quess,
   Lesson8Quess,
+  Lesson9Quess,
   lesson1Words,
   lesson6Words,
   lesson7Words,
   lesson8Words,
+  lesson9Words,
 } from '../../constants';
 import { IState } from '../components/Lesson';
 import { useSelector } from 'react-redux';
@@ -59,6 +61,10 @@ const HomeScreen: React.ComponentType = () => {
       dispatch(lessonQuessInit(Lesson8Quess));
       dispatch(lessonWordsInit(lesson8Words));
     }
+    if (numLesson === 9) {
+      dispatch(lessonQuessInit(Lesson9Quess));
+      dispatch(lessonWordsInit(lesson9Words));
+    }
 
     navigate('/lesson', { state: { lesson: name } });
   };
@@ -96,6 +102,10 @@ const HomeScreen: React.ComponentType = () => {
         <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Урок 8', 8)}>
           <Text style={styles.buttonsText}>Урок 8</Text>
           <Text style={styles.buttonsTextDescription}>Вопросы</Text>
+        </Pressable>
+        <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Урок 9', 9)}>
+          <Text style={styles.buttonsText}>Урок 9</Text>
+          <Text style={styles.buttonsTextDescription}>Akkusativ – винительный падеж.</Text>
         </Pressable>
 
         <View>
