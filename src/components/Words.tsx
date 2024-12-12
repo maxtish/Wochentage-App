@@ -62,12 +62,12 @@ export const Words: React.FC<{ lessonWorlds: IWordsLesson[] }> = ({ lessonWorlds
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0,
+    flex: 1,
   },
   buttonContainer: {
     marginBottom: 10,
   },
-  buttonTexContainer: {},
+  buttonTexContainer: { flex: 1 },
   button: {
     backgroundColor: '#DCDCDC',
     fontWeight: '600',
