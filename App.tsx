@@ -8,6 +8,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import LessonScreen from './src/screens/LessonScreen';
 import ImagesAndWords from './src/screens/ImagesAndWords';
 import NumberSpeakScreen from './src/screens/NumberSpeakScreen';
+import TheoryScreen from './src/screens/TheoryScreen';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
               <Route path="/lesson" Component={LessonScreen} />
               <Route path="/imagesAndWords" Component={ImagesAndWords} />
               <Route path="/homeScreen" Component={NumberSpeakScreen} />
+              <Route path="/theoryScreen" Component={TheoryScreen} />
             </Routes>
           </NativeRouter>
         </View>

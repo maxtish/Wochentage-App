@@ -141,7 +141,9 @@ const HomeScreen: React.ComponentType = () => {
             <Text>Отправить</Text>
           </Pressable>
         </View>
-
+        <Pressable style={styles.buttonsNavi} onPress={() => navigate('/theoryScreen')}>
+          <Text style={styles.buttonsText}>Теория</Text>
+        </Pressable>
         <Pressable style={styles.buttonsNavi} onPress={() => navigate('/imagesAndWords')}>
           <Text style={styles.buttonsText}>Угадай картинку</Text>
         </Pressable>
