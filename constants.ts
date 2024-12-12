@@ -138,6 +138,14 @@ export const Lesson9Quess: TData[] = [
   },
 ];
 
+export const Lesson10Quess: TData[] = [
+  {
+    name: 'Dativ – wem?',
+    rus: ['МУЖСКОЙ DER (EIN) MANN', 'СРЕДНИЙ DAS (EIN) AUTO', 'ЖЕНСКИЙ DIE (EINE) FRAU', 'МНОЖ. ЧИСЛО DIE LEUTE'],
+    de: ['Dem (einem)', 'Dem (einem)', 'Der (einer)', 'Den (-n)'],
+  },
+];
+
 //// СЛОВА
 export const lesson1WordsArr: IWord[] = [
   { rus: 'Мужчина. Муж.', de: 'Der Mann' },
@@ -844,6 +852,104 @@ export const lesson9Sentence: IWord[] = [
     rus: 'Вы (Sie) продаете свое пальто. Ваше пальто дешевое.',
     de: 'Sie verkaufen Ihren Mantel. Ihr Mantel ist billig.',
   },
+];
+
+export const lesson10Sentence: IWord[] = [
+  {
+    rus: 'Я спрашиваю моего брата. Я отвечаю моему брату.',
+    de: 'Ich frage meinen Bruder. Ich antworte meinem Bruder.',
+  },
+  {
+    rus: 'Ты спрашиваешь твоего брата. Ты отвечаешь твоему брату.',
+    de: 'Du fragst deinen Bruder. Du antwortest deinem Bruder.',
+  },
+  {
+    rus: 'Он спрашивает своего брата. Он отвечает своему брату.',
+    de: 'Er fragt seinen Bruder. Er antwortet seinem Bruder.',
+  },
+  {
+    rus: 'Сестра спрашивает брата. Брат отвечает сестре.',
+    de: 'Die Schwester fragt den Bruder (A). Der Bruder antwortet der Schwester (D).',
+  },
+  {
+    rus: 'Брат спрашивает сестру. Сестра отвечает брату.',
+    de: 'Der Bruder fragt die Schwester. Die Schwester antwortet dem Bruder.',
+  },
+  {
+    rus: 'Папа спрашивает маму. Мама отвечает папе.',
+    de: 'Der Vater fragt die Mutter. Die Mutter antwortet dem Vater.',
+  },
+  {
+    rus: 'Мама спрашивает папу. Папа отвечает маме.',
+    de: 'Die Mutter fragt den Vater. Der Vater antwortet der Mutter.',
+  },
+  {
+    rus: 'Учитель спрашивает официанта. Официант отвечает учителю.',
+    de: 'Der Lehrer fragt den Kellner. Der Kellner antwortet dem Lehrer.',
+  },
+  {
+    rus: 'Официантка спрашивает учителя. Учитель отвечает официантке.',
+    de: 'Die Kellnerin fragt den Lehrer. Der Lehrer antwortet der Kellnerin.',
+  },
+  {
+    rus: 'Водитель спрашивает строителя. Строитель отвечает водителю.',
+    de: 'Der Fahrer fragt den Bauarbeiter. Der Bauarbeiter antwortet dem Fahrer.',
+  },
+  {
+    rus: 'Продавщица спрашивает повара. Повар отвечает продавщице.',
+    de: 'Die Verkäuferin fragt den Koch. Der Koch antwortet der Verkäuferin.',
+  },
+  {
+    rus: 'Я показываю машину папе. Машина нравится папе. Я дарю машину папе.',
+    de: 'Ich zeige dem Vater (D) das Auto (A). Das Auto (N) gefällt dem Vater (D). Ich schenke dem Vater (D) das Auto (A).',
+  },
+  {
+    rus: 'Ты показываешь дом маме. Дом нравится маме. Ты даришь дом маме.',
+    de: 'Du zeigst der Mutter das Haus. Das Haus gefällt der Mutter. Du schenkst der Mutter das Haus.',
+  },
+  {
+    rus: 'Он показывает ручку другу. Ручка нравится другу. Он дарит ручку другу.',
+    de: 'Er zeigt dem Freund den Füller. Der Füller gefällt dem Freund. Er schenkt dem Freund den Füller.',
+  },
+  {
+    rus: 'Она показывает книгу подруге. Книга нравится подруге. Она дарит книгу подруге.',
+    de: 'Sie zeigt der Freundin das Buch. Das Buch gefällt der Freundin. Sie schenkt der Freundin das Buch.',
+  },
+  {
+    rus: 'Вы (ihr) показываете пальто сестре. Пальто нравится сестре. Вы дарите пальто сестре.',
+    de: 'Ihr zeigt der Schwester den Mantel. Der Mantel gefällt der Schwester. Ihr schenkt der Schwester den Mantel.',
+  },
+  {
+    rus: 'Мы показываем тарелку друзьям. Тарелка нравится друзьям. Мы дарим тарелку друзьям.',
+    de: 'Wir zeigen den Freunden den Teller. Der Teller gefällt den Freunden. Wir schenken den Freunden den Teller.',
+  },
+  {
+    rus: 'Они показывают корабль детям. Корабль нравится детям. Они дарят детям корабль.',
+    de: 'Sie zeigen den Kindern das Schiff. Das Schiff gefällt den Kindern. Sie schenken den Kindern das Schiff.',
+  },
+  { rus: 'Я показываю моей маме квартиру.', de: 'Ich zeige meiner Mutter meine Wohnung.' },
+  { rus: 'Ты показываешь твоей маме твою квартиру.', de: 'Du zeigst deiner Mutter deine Wohnung.' },
+  { rus: 'Он показывает своей маме свою квартиру.', de: 'Er zeigt seiner Mutter seine Wohnung.' },
+  { rus: 'Она показывает своей маме свою квартиру.', de: 'Sie zeigt ihrer Mutter ihre Wohnung.' },
+  { rus: 'Мы показываем нашей маме нашу квартиру.', de: 'Wir zeigen unserer Mutter unsere Wohnung.' },
+  { rus: 'Вы показываете вашей маме вашу квартиру.', de: 'Ihr zeigt eurer Mutter eure Wohnung.' },
+  { rus: 'Они показывают своей маме их квартиру.', de: 'Sie zeigen ihrer Mutter ihre Wohnung.' },
+  { rus: 'Я показываю моему другу мой дом.', de: 'Ich zeige meinem Freund mein Haus.' },
+  { rus: 'Я показываю моим друзьям мою ручку.', de: 'Ich zeige meinen Freunden meinen Füller.' },
+  { rus: 'Я дарю свою машину моему брату.', de: 'Ich schenke meinem Bruder mein Auto.' },
+  { rus: 'Я дарю свою одежду моим друзьям.', de: 'Ich schenke meinen Freunden meine Kleidung.' },
+  { rus: 'Я даю свою книгу моим родителям.', de: 'Ich gebe meinen Eltern mein Buch.' },
+  { rus: 'Я даю свою кофту моей подруге.', de: 'Ich gebe meiner Freundin meinen Pullover.' },
+  { rus: 'Я спрашиваю моего ребенка. Я отвечаю моему ребенку.', de: 'Ich frage mein Kind. Ich antworte meinem Kind.' },
+  {
+    rus: 'Я спрашиваю мою сестру. Я отвечаю моей сестре.',
+    de: 'Ich frage meine Schwester. Ich antworte meiner Schwester.',
+  },
+  {
+    rus: 'Я спрашиваю моих друзей. Я отвечаю моим друзьям.',
+    de: 'Ich frage meine Freunde. Ich antworte meinen Freunden.',
+  },
+  { rus: 'Я спрашиваю моих детей. Я отвечаю моим детям.', de: 'Ich frage meine Kinder. Ich antworte meinen Kindern.' },
 ];
 
 export const a1Words: IWord[] = [
@@ -1959,3 +2065,5 @@ export const lesson8Words: IWordsLesson[] = [
 ];
 
 export const lesson9Words: IWordsLesson[] = [{ name: 'Akkusativ', data: lesson9Sentence }];
+
+export const lesson10Words: IWordsLesson[] = [{ name: 'Dativ', data: lesson10Sentence }];

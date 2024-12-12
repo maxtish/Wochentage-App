@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Pressable, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+  ScrollView,
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-native';
 import {
@@ -15,11 +24,13 @@ import {
   Lesson7Quess,
   Lesson8Quess,
   Lesson9Quess,
+  Lesson10Quess,
   lesson1Words,
   lesson6Words,
   lesson7Words,
   lesson8Words,
   lesson9Words,
+  lesson10Words,
 } from '../../constants';
 import { IState } from '../components/Lesson';
 import { useSelector } from 'react-redux';
@@ -66,6 +77,11 @@ const HomeScreen: React.ComponentType = () => {
       dispatch(lessonWordsInit(lesson9Words));
     }
 
+    if (numLesson === 10) {
+      dispatch(lessonQuessInit(Lesson10Quess));
+      dispatch(lessonWordsInit(lesson10Words));
+    }
+
     navigate('/lesson', { state: { lesson: name } });
   };
 
@@ -85,7 +101,7 @@ const HomeScreen: React.ComponentType = () => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <Text>Это главный экран</Text>
         <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Урок 1', 1)}>
           <Text style={styles.buttonsText}>Урок 1</Text>
@@ -106,6 +122,10 @@ const HomeScreen: React.ComponentType = () => {
         <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Урок 9', 9)}>
           <Text style={styles.buttonsText}>Урок 9</Text>
           <Text style={styles.buttonsTextDescription}>Akkusativ – винительный падеж.</Text>
+        </Pressable>
+        <Pressable style={styles.buttonsNavi} onPress={() => ToLesson('Урок 10', 10)}>
+          <Text style={styles.buttonsText}>Урок 10</Text>
+          <Text style={styles.buttonsTextDescription}>Dativ - дательный падеж.</Text>
         </Pressable>
 
         <View>
@@ -133,7 +153,7 @@ const HomeScreen: React.ComponentType = () => {
         <Pressable style={styles.buttonClearCache} onPress={handleClearCache}>
           <Text style={styles.buttonsText}>Очистить кэш</Text>
         </Pressable>
-      </View>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 };
@@ -141,9 +161,9 @@ const HomeScreen: React.ComponentType = () => {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 50,
-    flex: 1,
-    gap: 20,
+    flexGrow: 1,
     alignItems: 'center',
+    gap: 20,
   },
   buttonsNavi: {
     width: '50%',
